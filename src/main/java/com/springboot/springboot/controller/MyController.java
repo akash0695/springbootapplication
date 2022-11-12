@@ -2,6 +2,8 @@ package com.springboot.springboot.controller;
 
 import java.util.List;
 
+import com.springboot.springboot.entities.FormData;
+import com.springboot.springboot.services.FormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,8 @@ public class MyController {
 	
 	@Autowired
 	private CourseService courseService;
+	@Autowired
+	private FormService formService;
 //	@GetMapping("/home")
 //	public String home() {
 //		 
@@ -58,5 +62,9 @@ public class MyController {
 	public void deleteCourse(@PathVariable String courseId)
 	{
 		 this.courseService.deleteCourse(Long.parseLong(courseId));
+	}
+	@PostMapping("/id")
+	public FormData addData(@RequestBody FormData data) {
+		return this.formService.addData(data);
 	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.springboot.springboot.entities.Course;
 
+
 public interface CourseService {
 	
 	public List<Course> getCourses();
@@ -15,6 +16,6 @@ public interface CourseService {
 	public Course updateCourse(Course course);
 	
 	public void deleteCourse(long courseId);
-	
+
 
 }
