@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -63,8 +64,9 @@ public class MyController {
 	{
 		 this.courseService.deleteCourse(Long.parseLong(courseId));
 	}
-	@PostMapping("/id")
-	public FormData addData(@RequestBody FormData data) {
-		return this.formService.addData(data);
+	@PostMapping(value = "/form", consumes = {"*/*"})
+	public FormData addData(@RequestParam String name, String email, String message) {
+		return this.formService.addData(name, email, message);
+		
 	}
 }

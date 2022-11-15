@@ -35,8 +35,9 @@
       scrollTop: totalScroll
       }, 300);
   }
+  
+  	
 });
+
     
   })(window.jQuery);
-
-
