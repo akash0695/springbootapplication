@@ -5,9 +5,10 @@ import javax.persistence.Id;
 
 @Entity
 public class FormData {
-   @Id
-    private  int id;
+   
+  
     private String name;
+    @Id
     private String email;
     private String message;
 
@@ -15,21 +16,16 @@ public class FormData {
         super();
     }
 
-    public FormData(int id, String name, String email, String message) {
-        this.id = id;
+    public FormData( String name, String email, String message) {
+       
         this.name = name;
         this.email = email;
         this.message = message;
     }
 
-    public int getId() {
-        return id;
-    }
+  
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
+ 
     public String getName() {
         return name;
     }
@@ -57,7 +53,6 @@ public class FormData {
     @Override
     public String toString() {
         return "FormData{" +
-                "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", message='" + message + '\'' +
