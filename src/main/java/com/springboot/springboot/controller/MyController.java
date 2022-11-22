@@ -65,8 +65,8 @@ public class MyController {
 		 this.courseService.deleteCourse(Long.parseLong(courseId));
 	}
 	@PostMapping(value = "/form", consumes = {"*/*"})
-	public FormData addData(@RequestParam String name, String email, String message) {
-		return this.formService.addData(name, email, message);
-		
+	public ResponseEntity addData(@RequestParam String name, String email, String message) {
+		 this.formService.addData(name, email, message);
+		return ResponseEntity.ok("Your form have been send successfully:\n Thanks For your Interest");
 	}
 }
