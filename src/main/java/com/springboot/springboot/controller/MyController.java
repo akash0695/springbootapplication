@@ -14,7 +14,6 @@ import com.springboot.springboot.entities.Course;
 import com.springboot.springboot.services.CourseService;
 
 @RestController
-@RequestMapping("/form/v2")
 public class MyController {
 	
 	@Autowired
