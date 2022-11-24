@@ -1,17 +1,14 @@
 package com.springboot.springboot.controller;
 
-import java.util.List;
-
-import com.springboot.springboot.entities.FormData;
+import com.springboot.springboot.entities.Course;
+import com.springboot.springboot.services.CourseService;
 import com.springboot.springboot.services.FormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
-import com.springboot.springboot.entities.Course;
-import com.springboot.springboot.services.CourseService;
+import java.util.List;
 
 @RestController
 public class MyController {
