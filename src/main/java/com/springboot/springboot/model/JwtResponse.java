@@ -1,6 +1,8 @@
 package com.springboot.springboot.model;
 
 import java.io.Serializable;
+// Akash Gupta
+// Akash Gupta
 
 public class JwtResponse implements Serializable {
 
