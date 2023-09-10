@@ -1,15 +1,11 @@
 package com.springboot.springboot.services;
 
-import com.fasterxml.jackson.core.JsonGenerator;
 import com.springboot.springboot.dao.FormDao;
 import com.springboot.springboot.entities.FormData;
 // Akash Gupta
 // Akash Gupta
 
-import java.util.Iterator;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 @Service

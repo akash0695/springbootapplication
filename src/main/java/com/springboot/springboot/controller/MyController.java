@@ -55,6 +55,7 @@ public class MyController {
 	{
 		 this.courseService.deleteCourse(Long.parseLong(courseId));
 	}
+	@SuppressWarnings("rawtypes")
 	@PostMapping(value = "/form", consumes = {"*/*"})
 	public ResponseEntity addData(@RequestParam String name, String email, String message) {
 		 this.formService.addData(name, email, message);

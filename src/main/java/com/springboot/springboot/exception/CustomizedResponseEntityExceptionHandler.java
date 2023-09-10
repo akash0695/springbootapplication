@@ -17,12 +17,14 @@ import java.time.LocalDateTime;
 public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<ErrorDetails> handleAllException(Exception ex, WebRequest request) throws Exception {
-        ErrorDetails errorDetails=new ErrorDetails(LocalDateTime.now().now(),ex.getMessage(),request.getDescription(false));
+        @SuppressWarnings("static-access")
+		ErrorDetails errorDetails=new ErrorDetails(LocalDateTime.now().now(),ex.getMessage(),request.getDescription(false));
         return new ResponseEntity<ErrorDetails>(errorDetails,HttpStatus.INTERNAL_SERVER_ERROR);
     }
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        ErrorDetails errorDetails=new ErrorDetails(LocalDateTime.now().now(),"Total Error Count: " +ex.getErrorCount()+" First Error is this: "+ex.getFieldError().getDefaultMessage(),request.getDescription(false));
+        @SuppressWarnings("static-access")
+		ErrorDetails errorDetails=new ErrorDetails(LocalDateTime.now().now(),"Total Error Count: " +ex.getErrorCount()+" First Error is this: "+ex.getFieldError().getDefaultMessage(),request.getDescription(false));
         return new ResponseEntity<>(errorDetails,HttpStatus.BAD_REQUEST);
 
     }
