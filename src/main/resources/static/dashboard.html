@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Akash Creations</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/tooplate-waso-strategy.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'DM Sans', sans-serif;
+        }
+        .navbar {
+            background: linear-gradient(45deg, #f9c10b, #ffd700) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .navbar-brand {
+            font-weight: bold;
+            color: #333 !important;
+        }
+        .navbar-nav .nav-link {
+            color: #333 !important;
+            font-weight: 500;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #dc3545 !important;
+        }
+        .main-content {
+            padding: 30px 0;
+        }
+        .dashboard-header {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .stats-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+        .stats-icon {
+            font-size: 3rem;
+            color: #f9c10b;
+            margin-bottom: 15px;
+        }
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .stats-label {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        .submissions-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .submission-card {
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .submission-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        .submission-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .submission-id {
+            background: #f9c10b;
+            color: #333;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .submission-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .submission-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .submission-email {
+            color: #007bff;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .submission-message {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #f9c10b;
+        }
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+        }
+        .error {
+            text-align: center;
+            padding: 50px;
+            color: #dc3545;
+        }
+        .refresh-btn {
+            background: linear-gradient(45deg, #f9c10b, #ffd700);
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .logout-btn {
+            background: #dc3545;
+            border: none;
+            border-radius: 10px;
+            padding: 8px 15px;
+            color: white;
+            font-weight: bold;
+        }
+        .no-submissions {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+        }
+        .search-box {
+            margin-bottom: 20px;
+        }
+        .search-box input {
+            border-radius: 25px;
+            padding: 10px 20px;
+            border: 2px solid #e9ecef;
+        }
+        .search-box input:focus {
+            border-color: #f9c10b;
+            box-shadow: 0 0 0 0.2rem rgba(249, 193, 11, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-building"></i> Akash <span class="text-danger">Creations</span>
+            </a>
+            
+            <div class="navbar-nav ms-auto">
+                <span class="navbar-text me-3">
+                    Welcome, <span id="userDisplay"></span>
+                </span>
+                <button class="btn logout-btn" onclick="logout()">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <!-- Dashboard Header -->
+        <div class="dashboard-header">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1><i class="bi bi-speedometer2"></i> Dashboard</h1>
+                    <p class="text-muted">Manage and view contact form submissions</p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <button class="btn refresh-btn" onclick="loadDashboard()">
+                        <i class="bi bi-arrow-clockwise"></i> Refresh
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="row" id="statsContainer">
+            <div class="col-md-4">
+                <div class="stats-card text-center">
+                    <div class="stats-icon">
+                        <i class="bi bi-envelope"></i>
+                    </div>
+                    <div class="stats-number" id="totalSubmissions">0</div>
+                    <div class="stats-label">Total Submissions</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card text-center">
+                    <div class="stats-icon">
+                        <i class="bi bi-calendar-today"></i>
+                    </div>
+                    <div class="stats-number" id="todaySubmissions">0</div>
+                    <div class="stats-label">Today's Submissions</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card text-center">
+                    <div class="stats-icon">
+                        <i class="bi bi-people"></i>
+                    </div>
+                    <div class="stats-number" id="uniqueEmails">0</div>
+                    <div class="stats-label">Unique Emails</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submissions Container -->
+        <div class="submissions-container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h3><i class="bi bi-list-ul"></i> Recent Submissions</h3>
+                </div>
+                <div class="col-md-4">
+                    <div class="search-box">
+                        <input type="text" class="form-control" id="searchInput" 
+                               placeholder="Search by name or email...">
+                    </div>
+                </div>
+            </div>
+            
+            <div id="submissionsContainer">
+                <div class="loading">
+                    <i class="bi bi-hourglass-split" style="font-size: 2rem;"></i>
+                    <p>Loading submissions...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Check if user is logged in
+            const token = localStorage.getItem('jwtToken');
+            const username = localStorage.getItem('username');
+            
+            if (!token || !username) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Display username
+            $('#userDisplay').text(username);
+            
+            // Load dashboard data
+            loadDashboard();
+            
+            // Search functionality
+            $('#searchInput').on('input', function() {
+                filterSubmissions();
+            });
+        });
+        
+        function loadDashboard() {
+            // Show loading
+            $('#submissionsContainer').html('<div class="loading"><i class="bi bi-hourglass-split" style="font-size: 2rem;"></i><p>Loading submissions...</p></div>');
+            
+            const token = localStorage.getItem('jwtToken');
+            
+            $.ajax({
+                url: '/form-submissions',
+                type: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                },
+                success: function(data) {
+                    updateStats(data);
+                    displaySubmissions(data);
+                },
+                error: function(xhr, status, error) {
+                    if (xhr.status === 401) {
+                        // Token expired or invalid
+                        localStorage.removeItem('jwtToken');
+                        localStorage.removeItem('username');
+                        window.location.href = 'login.html';
+                    } else {
+                        $('#submissionsContainer').html('<div class="error"><i class="bi bi-exclamation-triangle" style="font-size: 2rem;"></i><p>Error loading submissions: ' + error + '</p></div>');
+                    }
+                }
+            });
+        }
+        
+        function updateStats(submissions) {
+            const total = submissions.length;
+            const today = new Date().toDateString();
+            const todaySubmissions = submissions.filter(s => {
+                const submissionDate = new Date(s.id).toDateString();
+                return submissionDate === today;
+            }).length;
+            
+            const uniqueEmails = [...new Set(submissions.map(s => s.email))].length;
+            
+            $('#totalSubmissions').text(total);
+            $('#todaySubmissions').text(todaySubmissions);
+            $('#uniqueEmails').text(uniqueEmails);
+        }
+        
+        function displaySubmissions(submissions) {
+            if (submissions.length === 0) {
+                $('#submissionsContainer').html('<div class="no-submissions"><i class="bi bi-inbox" style="font-size: 3rem; color: #ccc;"></i><p>No submissions found</p></div>');
+                return;
+            }
+            
+            let html = '';
+            submissions.forEach(function(submission) {
+                const date = new Date().toLocaleDateString();
+                html += `
+                    <div class="submission-card" data-name="${submission.name.toLowerCase()}" data-email="${submission.email.toLowerCase()}">
+                        <div class="submission-header">
+                            <span class="submission-id">#${submission.id}</span>
+                            <span class="submission-date">${date}</span>
+                        </div>
+                        <div class="submission-name">${submission.name}</div>
+                        <div class="submission-email">${submission.email}</div>
+                        <div class="submission-message">${submission.message}</div>
+                    </div>
+                `;
+            });
+            
+            $('#submissionsContainer').html(html);
+        }
+        
+        function filterSubmissions() {
+            const searchTerm = $('#searchInput').val().toLowerCase();
+            $('.submission-card').each(function() {
+                const name = $(this).data('name');
+                const email = $(this).data('email');
+                
+                if (name.includes(searchTerm) || email.includes(searchTerm)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
+        
+        function logout() {
+            localStorage.removeItem('jwtToken');
+            localStorage.removeItem('username');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html> 

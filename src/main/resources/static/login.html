@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Akash Creations</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/tooplate-waso-strategy.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .login-header h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .login-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 12px 15px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #f9c10b;
+            box-shadow: 0 0 0 0.2rem rgba(249, 193, 11, 0.25);
+        }
+        .btn-login {
+            background: linear-gradient(45deg, #f9c10b, #ffd700);
+            border: none;
+            border-radius: 10px;
+            padding: 12px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(249, 193, 11, 0.4);
+        }
+        .btn-login:disabled {
+            background: #ccc;
+            transform: none;
+            box-shadow: none;
+        }
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .register-link a {
+            color: #f9c10b;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+        .alert {
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .company-logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .company-logo h2 {
+            color: #333;
+            margin: 0;
+        }
+        .company-logo .text-danger {
+            color: #dc3545 !important;
+        }
+        .password-toggle {
+            position: relative;
+        }
+        .password-toggle .form-control {
+            padding-right: 50px;
+        }
+        .password-toggle .toggle-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="company-logo">
+            <h2>Akash <span class="text-danger">Creations</span></h2>
+        </div>
+        
+        <div class="login-header">
+            <h1>Welcome Back</h1>
+            <p>Login to access your dashboard</p>
+        </div>
+
+        <div id="alert-container"></div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" 
+                       placeholder="Enter your username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-toggle">
+                    <input type="password" class="form-control" id="password" name="password" 
+                           placeholder="Enter your password" required>
+                    <button type="button" class="toggle-btn" onclick="togglePassword()">
+                        <i class="bi bi-eye" id="toggleIcon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-login" id="loginBtn">
+                <i class="bi bi-box-arrow-in-right"></i> Login
+            </button>
+        </form>
+
+        <div class="register-link">
+            <p>Don't have an account? <a href="register.html">Register here</a></p>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#loginForm').on('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                var username = $('#username').val();
+                var password = $('#password').val();
+                
+                // Validate form
+                if (!username || !password) {
+                    showAlert('Please fill in all required fields.', 'danger');
+                    return;
+                }
+                
+                // Disable submit button
+                $('#loginBtn').prop('disabled', true).html('<i class="bi bi-hourglass-split"></i> Logging in...');
+                
+                // Create login data
+                var loginData = {
+                    username: username,
+                    password: password
+                };
+                
+                // Submit login
+                $.ajax({
+                    url: '/authenticate',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(loginData),
+                    success: function(response) {
+                        // Store token in localStorage
+                        localStorage.setItem('jwtToken', response.token);
+                        localStorage.setItem('username', username);
+                        
+                        showAlert('Login successful! Redirecting to dashboard...', 'success');
+                        
+                        // Check if user is admin and redirect accordingly
+                        setTimeout(function() {
+                            // For now, redirect to regular dashboard
+                            // Admin check will be implemented in backend
+                            window.location.href = 'dashboard.html';
+                        }, 1000);
+                    },
+                    error: function(xhr, status, error) {
+                        var errorMessage = 'Login failed. Please check your credentials.';
+                        if (xhr.status === 401) {
+                            errorMessage = 'Invalid username or password.';
+                        }
+                        showAlert(errorMessage, 'danger');
+                    },
+                    complete: function() {
+                        // Re-enable submit button
+                        $('#loginBtn').prop('disabled', false).html('<i class="bi bi-box-arrow-in-right"></i> Login');
+                    }
+                });
+            });
+            
+            function showAlert(message, type) {
+                $('#alert-container').html('<div class="alert alert-' + type + ' alert-dismissible fade show" role="alert">' +
+                    message +
+                    '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' +
+                    '</div>');
+            }
+        });
+        
+        function togglePassword() {
+            var passwordField = document.getElementById('password');
+            var toggleIcon = document.getElementById('toggleIcon');
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleIcon.className = 'bi bi-eye-slash';
+            } else {
+                passwordField.type = 'password';
+                toggleIcon.className = 'bi bi-eye';
+            }
+        }
+    </script>
+</body>
+</html> 

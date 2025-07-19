@@ -16,6 +16,16 @@ public class DAOUser {
 	@Column
 	@JsonIgnore
 	private String password;
+	@Column
+	private String email;
+	@Column
+	private String companyName;
+	@Column
+	private String phone;
+	@Column
+	private Boolean isAdmin = false;
+	@Column
+	private Boolean isApproved = false;
 
 	public String getUsername() {
 		return username;
@@ -31,6 +41,46 @@ public class DAOUser {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public Boolean getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(Boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
+	public Boolean getIsApproved() {
+		return isApproved;
+	}
+
+	public void setIsApproved(Boolean isApproved) {
+		this.isApproved = isApproved;
 	}
 
 }

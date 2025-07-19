@@ -54,13 +54,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		// We don't need CSRF for this example
 		httpSecurity.csrf().disable()
-				// dont authenticate this particular request
-				.authorizeRequests().antMatchers("/authenticate", "/register").permitAll().
-				// all other requests need to be authenticated
-				anyRequest().authenticated().and().
+				// Public access - no authentication required
+				.authorizeRequests()
+					.antMatchers("/authenticate", "/register").permitAll()  // Authentication endpoints
+					.antMatchers("/form").permitAll()  // Contact form submission
+					.antMatchers("/", "/index.html").permitAll()  // Main website
+					.antMatchers("/login.html", "/register.html").permitAll()  // Login/Register pages
+					.antMatchers("/test-form.html", "/view-submissions.html").permitAll()  // Test pages
+					.antMatchers("/css/**", "/js/**", "/images/**", "/fonts/**").permitAll()  // Static resources
+					.antMatchers("/dashboard.html").permitAll()  // Dashboard page (handles auth in frontend)
+					.antMatchers("/form-submissions").authenticated()  // API requires authentication
+					.antMatchers("/admin/**").authenticated()  // Admin endpoints require authentication
+					.anyRequest().authenticated()  // All other requests need authentication
+				.and()
 				// make sure we use stateless session; session won't be used to
 				// store user's state.
-				exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
+				.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 		// Add a filter to validate the tokens with every request
