@@ -57,6 +57,18 @@ public class JwtUserDetailsService implements UserDetailsService {
 		return userDao.save(newUser);
 	}
 
+	public DAOUser saveAdmin(UserDTO user) {
+		DAOUser newUser = new DAOUser();
+		newUser.setUsername(user.getUsername());
+		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
+		newUser.setEmail(user.getEmail());
+		newUser.setCompanyName(user.getCompanyName());
+		newUser.setPhone(user.getPhone());
+		newUser.setIsAdmin(true); // Set as admin
+		newUser.setIsApproved(true); // Auto-approve admin
+		return userDao.save(newUser);
+	}
+
 	// Admin methods
 	public List<DAOUser> getPendingUsers() {
 		return userDao.findByIsApprovedFalse();
@@ -88,6 +100,11 @@ public class JwtUserDetailsService implements UserDetailsService {
 		stats.put("approvedUsers", userDao.countByIsApprovedTrue());
 		stats.put("adminUsers", userDao.countByIsAdminTrue());
 		return stats;
+	}
+
+	// Get user by username
+	public DAOUser findByUsername(String username) {
+		return userDao.findByUsername(username);
 	}
 
 }

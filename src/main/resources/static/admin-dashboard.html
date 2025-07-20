@@ -293,9 +293,17 @@
             // Check if user is logged in and is admin
             const token = localStorage.getItem('jwtToken');
             const username = localStorage.getItem('username');
+            const isAdmin = localStorage.getItem('isAdmin');
             
             if (!token || !username) {
                 window.location.href = 'login.html';
+                return;
+            }
+            
+            // Check if user is admin
+            if (isAdmin !== 'true') {
+                alert('Access denied. Admin privileges required.');
+                window.location.href = 'dashboard.html';
                 return;
             }
             

@@ -188,17 +188,25 @@
                     contentType: 'application/json',
                     data: JSON.stringify(loginData),
                     success: function(response) {
-                        // Store token in localStorage
+                        // Store token and user info in localStorage
                         localStorage.setItem('jwtToken', response.token);
-                        localStorage.setItem('username', username);
+                        localStorage.setItem('username', response.username);
+                        localStorage.setItem('isAdmin', response.isAdmin);
+                        localStorage.setItem('isApproved', response.isApproved);
+                        localStorage.setItem('email', response.email);
+                        localStorage.setItem('companyName', response.companyName);
                         
-                        showAlert('Login successful! Redirecting to dashboard...', 'success');
+                        showAlert('Login successful! Redirecting...', 'success');
                         
                         // Check if user is admin and redirect accordingly
                         setTimeout(function() {
-                            // For now, redirect to regular dashboard
-                            // Admin check will be implemented in backend
-                            window.location.href = 'dashboard.html';
+                            if (response.isAdmin) {
+                                // Redirect admin to admin dashboard
+                                window.location.href = 'admin-dashboard.html';
+                            } else {
+                                // Redirect regular users to regular dashboard
+                                window.location.href = 'dashboard.html';
+                            }
                         }, 1000);
                     },
                     error: function(xhr, status, error) {

@@ -17,7 +17,11 @@ import com.springboot.springboot.config.JwtTokenUtil;
 import com.springboot.springboot.model.JwtRequest;
 import com.springboot.springboot.model.JwtResponse;
 import com.springboot.springboot.model.UserDTO;
+import com.springboot.springboot.model.DAOUser;
 import com.springboot.springboot.services.JwtUserDetailsService;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -39,14 +43,31 @@ public class JwtAuthenticationController {
 
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 
-		final String token = jwtTokenUtil.generateToken(userDetails);
+		// Get user details including admin status
+		DAOUser user = userDetailsService.findByUsername(authenticationRequest.getUsername());
+		
+		// Generate token with admin status
+		final String token = jwtTokenUtil.generateToken(userDetails, user.getIsAdmin());
 
-		return ResponseEntity.ok(new JwtResponse(token));
+		Map<String, Object> response = new HashMap<>();
+		response.put("token", token);
+		response.put("username", user.getUsername());
+		response.put("isAdmin", user.getIsAdmin());
+		response.put("isApproved", user.getIsApproved());
+		response.put("email", user.getEmail());
+		response.put("companyName", user.getCompanyName());
+
+		return ResponseEntity.ok(response);
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<?> save(@RequestBody UserDTO user) throws Exception {
 		return ResponseEntity.ok(userDetailsService.save(user));
+	}
+
+	@RequestMapping(value = "/register-admin", method = RequestMethod.POST)
+	public ResponseEntity<?> saveAdmin(@RequestBody UserDTO user) throws Exception {
+		return ResponseEntity.ok(userDetailsService.saveAdmin(user));
 	}
 
 	private void authenticate(String username, String password) throws Exception {
