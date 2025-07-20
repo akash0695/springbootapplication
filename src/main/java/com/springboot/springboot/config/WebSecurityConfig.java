@@ -63,6 +63,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					.antMatchers("/test-form.html", "/view-submissions.html").permitAll()  // Test pages
 					.antMatchers("/css/**", "/js/**", "/images/**", "/fonts/**").permitAll()  // Static resources
 					.antMatchers("/dashboard.html").permitAll()  // Dashboard page (handles auth in frontend)
+					.antMatchers("/admin-dashboard.html").permitAll()  // Admin dashboard page (handles auth in frontend)
+					.antMatchers("/create-admin.html").permitAll()  // Admin creation page
 					.antMatchers("/form-submissions").authenticated()  // API requires authentication
 					.antMatchers("/admin/**").authenticated()  // Admin endpoints require authentication
 					.anyRequest().authenticated()  // All other requests need authentication

@@ -28,6 +28,11 @@ public class JwtTokenUtil implements Serializable {
 		return getClaimFromToken(token, Claims::getSubject);
 	}
 
+	public Boolean getIsAdminFromToken(String token) {
+		final Claims claims = getAllClaimsFromToken(token);
+		return claims.get("isAdmin", Boolean.class);
+	}
+
 	public Date getIssuedAtDateFromToken(String token) {
 		return getClaimFromToken(token, Claims::getIssuedAt);
 	}
@@ -57,6 +62,12 @@ public class JwtTokenUtil implements Serializable {
 
 	public String generateToken(UserDetails userDetails) {
 		Map<String, Object> claims = new HashMap<>();
+		return doGenerateToken(claims, userDetails.getUsername());
+	}
+
+	public String generateToken(UserDetails userDetails, boolean isAdmin) {
+		Map<String, Object> claims = new HashMap<>();
+		claims.put("isAdmin", isAdmin);
 		return doGenerateToken(claims, userDetails.getUsername());
 	}
 
