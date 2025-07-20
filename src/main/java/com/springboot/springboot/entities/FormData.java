@@ -6,30 +6,45 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Column;
+
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 public class FormData {
    
-  
-    private String name;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(nullable = false)
+    private String name;
+    
+    @Column(nullable = false)
     private String email;
+    
+    @Column(nullable = false)
     private String message;
 
     public FormData() {
         super();
     }
 
-    public FormData( String name, String email, String message) {
-       
+    public FormData(String name, String email, String message) {
         this.name = name;
         this.email = email;
         this.message = message;
     }
 
-  
+    public Long getId() {
+        return id;
+    }
 
- 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -57,6 +72,7 @@ public class FormData {
     @Override
     public String toString() {
         return "FormData{" +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", message='" + message + '\'' +

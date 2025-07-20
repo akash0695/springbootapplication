@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 // Akash Gupta
 // Akash Gupta
 @EnableJpaRepositories
-public interface FormDao extends JpaRepository<FormData,String> {
+public interface FormDao extends JpaRepository<FormData,Long> {
 }

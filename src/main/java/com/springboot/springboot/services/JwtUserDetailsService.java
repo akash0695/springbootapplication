@@ -1,6 +1,9 @@
 package com.springboot.springboot.services;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -46,7 +49,45 @@ public class JwtUserDetailsService implements UserDetailsService {
 		DAOUser newUser = new DAOUser();
 		newUser.setUsername(user.getUsername());
 		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
-		return  userDao.save(newUser);
+		newUser.setEmail(user.getEmail());
+		newUser.setCompanyName(user.getCompanyName());
+		newUser.setPhone(user.getPhone());
+		newUser.setIsAdmin(false); // Default to regular user
+		newUser.setIsApproved(false); // Default to not approved
+		return userDao.save(newUser);
+	}
+
+	// Admin methods
+	public List<DAOUser> getPendingUsers() {
+		return userDao.findByIsApprovedFalse();
+	}
+
+	public List<DAOUser> getApprovedUsers() {
+		return userDao.findByIsApprovedTrue();
+	}
+
+	public void approveUser(Long userId) {
+		DAOUser user = userDao.findById(userId).orElse(null);
+		if (user != null) {
+			user.setIsApproved(true);
+			userDao.save(user);
+		}
+	}
+
+	public void rejectUser(Long userId) {
+		DAOUser user = userDao.findById(userId).orElse(null);
+		if (user != null) {
+			userDao.delete(user);
+		}
+	}
+
+	public Map<String, Object> getDashboardStats() {
+		Map<String, Object> stats = new HashMap<>();
+		stats.put("totalUsers", userDao.count());
+		stats.put("pendingUsers", userDao.countByIsApprovedFalse());
+		stats.put("approvedUsers", userDao.countByIsApprovedTrue());
+		stats.put("adminUsers", userDao.countByIsAdminTrue());
+		return stats;
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.springboot.springboot.controller;
 
 import com.springboot.springboot.entities.Course;
+import com.springboot.springboot.entities.FormData;
 import com.springboot.springboot.services.CourseService;
 import com.springboot.springboot.services.FormService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,5 +61,11 @@ public class MyController {
 	public ResponseEntity addData(@RequestParam String name, String email, String message) {
 		 this.formService.addData(name, email, message);
 		return ResponseEntity.ok("Your form have been send successfully:\n Thanks For your Interest");
+	}
+	
+	@GetMapping("/form-submissions")
+	public ResponseEntity<List<FormData>> getAllFormSubmissions() {
+		List<FormData> submissions = this.formService.getAllFormSubmissions();
+		return ResponseEntity.ok(submissions);
 	}
 }

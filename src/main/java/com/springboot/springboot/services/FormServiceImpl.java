@@ -7,6 +7,7 @@ import com.springboot.springboot.entities.FormData;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 public class FormServiceImpl implements FormService {
@@ -23,5 +24,9 @@ public class FormServiceImpl implements FormService {
 	return data;
 	}
 
+	@Override
+	public List<FormData> getAllFormSubmissions() {
+		return formDao.findAll();
+	}
 
 }
