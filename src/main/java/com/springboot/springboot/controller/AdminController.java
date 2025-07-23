@@ -37,9 +37,9 @@ public class AdminController {
 
     // Approve a user
     @PostMapping("/approve-user/{userId}")
-    public ResponseEntity<String> approveUser(@PathVariable Long userId) {
+    public ResponseEntity<String> approveUser(@PathVariable Long userId, @RequestParam String approvedBy) {
         try {
-            userDetailsService.approveUser(userId);
+            userDetailsService.approveUser(userId, approvedBy);
             return ResponseEntity.ok("User approved successfully");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

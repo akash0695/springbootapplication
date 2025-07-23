@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class DAOUser {
 
 	@Id
@@ -16,16 +16,20 @@ public class DAOUser {
 	@Column
 	@JsonIgnore
 	private String password;
-	@Column
+	@Column(unique=true)
 	private String email;
 	@Column
 	private String companyName;
-	@Column
+	@Column(unique=true)
 	private String phone;
 	@Column
 	private Boolean isAdmin = false;
 	@Column
 	private Boolean isApproved = false;
+	@Column
+	private String approvedBy;
+	@Column
+	private java.time.LocalDateTime approvedAt;
 
 	public String getUsername() {
 		return username;
@@ -81,6 +85,22 @@ public class DAOUser {
 
 	public void setIsApproved(Boolean isApproved) {
 		this.isApproved = isApproved;
+	}
+
+	public String getApprovedBy() {
+		return approvedBy;
+	}
+
+	public void setApprovedBy(String approvedBy) {
+		this.approvedBy = approvedBy;
+	}
+
+	public java.time.LocalDateTime getApprovedAt() {
+		return approvedAt;
+	}
+
+	public void setApprovedAt(java.time.LocalDateTime approvedAt) {
+		this.approvedAt = approvedAt;
 	}
 
 }

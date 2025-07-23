@@ -20,6 +20,7 @@ public class FormServiceImpl implements FormService {
 		data.setName(name);
 		data.setEmail(email);
 		data.setMessage(message);
+		data.setSubmittedAt(java.time.LocalDateTime.now());
 		formDao.save(data);
 	return data;
 	}

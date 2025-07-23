@@ -41,6 +41,12 @@ public class JwtUserDetailsService implements UserDetailsService {
 		if (user == null) {
 			throw new UsernameNotFoundException("User not found with username: " + username);
 		}
+		
+		// Check if user is approved (except for admin users)
+		if (!user.getIsAdmin() && !user.getIsApproved()) {
+			throw new UsernameNotFoundException("User account is not approved yet. Please wait for admin approval.");
+		}
+		
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
 				new ArrayList<>());
 	}
@@ -86,6 +92,16 @@ public class JwtUserDetailsService implements UserDetailsService {
 		}
 	}
 
+	public void approveUser(Long userId, String approvedBy) {
+		DAOUser user = userDao.findById(userId).orElse(null);
+		if (user != null) {
+			user.setIsApproved(true);
+			user.setApprovedBy(approvedBy);
+			user.setApprovedAt(java.time.LocalDateTime.now());
+			userDao.save(user);
+		}
+	}
+
 	public void rejectUser(Long userId) {
 		DAOUser user = userDao.findById(userId).orElse(null);
 		if (user != null) {
@@ -105,6 +121,16 @@ public class JwtUserDetailsService implements UserDetailsService {
 	// Get user by username
 	public DAOUser findByUsername(String username) {
 		return userDao.findByUsername(username);
+	}
+
+	// Get user by email
+	public DAOUser findByEmail(String email) {
+		return userDao.findByEmail(email);
+	}
+
+	// Get user by phone
+	public DAOUser findByPhone(String phone) {
+		return userDao.findByPhone(phone);
 	}
 
 }

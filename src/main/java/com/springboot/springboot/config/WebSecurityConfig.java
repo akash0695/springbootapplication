@@ -57,10 +57,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// Public access - no authentication required
 				.authorizeRequests()
 					.antMatchers("/authenticate", "/register").permitAll()  // Authentication endpoints
+					.antMatchers("/check-approval-status").permitAll()  // Check approval status
 					.antMatchers("/form").permitAll()  // Contact form submission
 					.antMatchers("/", "/index.html").permitAll()  // Main website
+					.antMatchers("/test.html").permitAll()  // Test page
 					.antMatchers("/login.html", "/register.html").permitAll()  // Login/Register pages
+					.antMatchers("/check-status.html").permitAll()  // Check approval status page
 					.antMatchers("/test-form.html", "/view-submissions.html").permitAll()  // Test pages
+					.antMatchers("/test-contact-form.html").permitAll()  // Test contact form
 					.antMatchers("/css/**", "/js/**", "/images/**", "/fonts/**").permitAll()  // Static resources
 					.antMatchers("/dashboard.html").permitAll()  // Dashboard page (handles auth in frontend)
 					.antMatchers("/admin-dashboard.html").permitAll()  // Admin dashboard page (handles auth in frontend)

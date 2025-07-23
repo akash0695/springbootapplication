@@ -22,6 +22,8 @@ import com.springboot.springboot.services.JwtUserDetailsService;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.http.HttpStatus;
 
 @RestController
 @CrossOrigin
@@ -39,25 +41,45 @@ public class JwtAuthenticationController {
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
-		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+		try {
+			authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
-		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+			final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 
-		// Get user details including admin status
-		DAOUser user = userDetailsService.findByUsername(authenticationRequest.getUsername());
-		
-		// Generate token with admin status
-		final String token = jwtTokenUtil.generateToken(userDetails, user.getIsAdmin());
+			// Get user details including admin status
+			DAOUser user = userDetailsService.findByUsername(authenticationRequest.getUsername());
+			
+			// Check if user is approved (except for admin users)
+			if (!user.getIsAdmin() && !user.getIsApproved()) {
+				Map<String, Object> errorResponse = new HashMap<>();
+				errorResponse.put("error", "ACCOUNT_NOT_APPROVED");
+				errorResponse.put("message", "Your account is not approved yet. Please wait for admin approval.");
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
+			}
+			
+			// Generate token with admin status
+			final String token = jwtTokenUtil.generateToken(userDetails, user.getIsAdmin());
 
-		Map<String, Object> response = new HashMap<>();
-		response.put("token", token);
-		response.put("username", user.getUsername());
-		response.put("isAdmin", user.getIsAdmin());
-		response.put("isApproved", user.getIsApproved());
-		response.put("email", user.getEmail());
-		response.put("companyName", user.getCompanyName());
+			Map<String, Object> response = new HashMap<>();
+			response.put("token", token);
+			response.put("username", user.getUsername());
+			response.put("isAdmin", user.getIsAdmin());
+			response.put("isApproved", user.getIsApproved());
+			response.put("email", user.getEmail());
+			response.put("companyName", user.getCompanyName());
 
-		return ResponseEntity.ok(response);
+			return ResponseEntity.ok(response);
+		} catch (UsernameNotFoundException e) {
+			Map<String, Object> errorResponse = new HashMap<>();
+			errorResponse.put("error", "ACCOUNT_NOT_APPROVED");
+			errorResponse.put("message", e.getMessage());
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
+		} catch (Exception e) {
+			Map<String, Object> errorResponse = new HashMap<>();
+			errorResponse.put("error", "AUTHENTICATION_FAILED");
+			errorResponse.put("message", "Invalid username or password.");
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
+		}
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -68,6 +90,57 @@ public class JwtAuthenticationController {
 	@RequestMapping(value = "/register-admin", method = RequestMethod.POST)
 	public ResponseEntity<?> saveAdmin(@RequestBody UserDTO user) throws Exception {
 		return ResponseEntity.ok(userDetailsService.saveAdmin(user));
+	}
+
+	@RequestMapping(value = "/check-approval-status", method = RequestMethod.POST)
+	public ResponseEntity<?> checkApprovalStatus(@RequestBody Map<String, String> request) {
+		try {
+			String email = request.get("email");
+			String mobile = request.get("mobile");
+			
+			if (email == null && mobile == null) {
+				Map<String, Object> errorResponse = new HashMap<>();
+				errorResponse.put("error", "MISSING_PARAMETER");
+				errorResponse.put("message", "Please provide either email or mobile number");
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+			}
+			
+			DAOUser user = null;
+			if (email != null && !email.trim().isEmpty()) {
+				user = userDetailsService.findByEmail(email);
+			} else if (mobile != null && !mobile.trim().isEmpty()) {
+				user = userDetailsService.findByPhone(mobile);
+			}
+			
+			if (user == null) {
+				Map<String, Object> errorResponse = new HashMap<>();
+				errorResponse.put("error", "USER_NOT_FOUND");
+				errorResponse.put("message", "No account found with the provided email or mobile number");
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+			}
+			
+			Map<String, Object> response = new HashMap<>();
+			response.put("username", user.getUsername());
+			response.put("email", user.getEmail());
+			response.put("mobile", user.getPhone());
+			response.put("isApproved", user.getIsApproved());
+			response.put("isAdmin", user.getIsAdmin());
+			
+			if (!user.getIsApproved() && !user.getIsAdmin()) {
+				response.put("message", "Your account is pending admin approval. Please wait for approval before logging in.");
+			} else if (user.getIsAdmin()) {
+				response.put("message", "Admin account - no approval required.");
+			} else {
+				response.put("message", "Account is approved and ready for login.");
+			}
+			
+			return ResponseEntity.ok(response);
+		} catch (Exception e) {
+			Map<String, Object> errorResponse = new HashMap<>();
+			errorResponse.put("error", "SERVER_ERROR");
+			errorResponse.put("message", "Error checking approval status");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+		}
 	}
 
 	private void authenticate(String username, String password) throws Exception {

@@ -208,13 +208,8 @@
                     contentType: 'application/json',
                     data: JSON.stringify(userData),
                     success: function(response) {
-                        showAlert('Account created successfully! You can now login.', 'success');
+                        showAlert('Registration successful! Your account has been created and is pending admin approval. You will be able to login once an admin approves your account.', 'success');
                         $('#registerForm')[0].reset();
-                        
-                        // Redirect to login page after 2 seconds
-                        setTimeout(function() {
-                            window.location.href = 'login.html';
-                        }, 2000);
                     },
                     error: function(xhr, status, error) {
                         var errorMessage = 'Registration failed. Please try again.';
