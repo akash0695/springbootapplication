@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Akash Creations</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-icons.css" rel="stylesheet">
     <link href="css/tooplate-waso-strategy.css" rel="stylesheet">
@@ -314,8 +315,9 @@
             loadAdminData();
             
             // Tab switching
-            $('button[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
-                const target = $(e.target).attr('data-bs-target');
+            $('button[data-bs-toggle="tab"]').on('click', function (e) {
+                const target = $(this).attr('data-bs-target');
+                console.log('Tab clicked:', target);
                 if (target === '#pending') {
                     loadPendingUsers();
                 } else if (target === '#approved') {
@@ -324,6 +326,16 @@
                     loadFormSubmissions();
                 }
             });
+            
+            // Initialize Bootstrap tabs
+            var triggerTabList = [].slice.call(document.querySelectorAll('#adminTabs button'))
+            triggerTabList.forEach(function (triggerEl) {
+                var tabTrigger = new bootstrap.Tab(triggerEl)
+                triggerEl.addEventListener('click', function (event) {
+                    event.preventDefault()
+                    tabTrigger.show()
+                })
+            })
         });
         
         function loadAdminData() {
@@ -459,6 +471,9 @@
             
             let html = '';
             users.forEach(function(user) {
+                const approvedDate = user.approvedAt ? new Date(user.approvedAt).toLocaleDateString() : 'N/A';
+                const approvedBy = user.approvedBy || 'N/A';
+                
                 html += `
                     <div class="user-card">
                         <div class="user-info">
@@ -467,6 +482,8 @@
                             <div class="user-details"><strong>Company:</strong> ${user.companyName || 'N/A'}</div>
                             <div class="user-details"><strong>Phone:</strong> ${user.phone || 'N/A'}</div>
                             <div class="user-details"><strong>Status:</strong> <span class="badge bg-success">Approved</span></div>
+                            <div class="user-details"><strong>Approved by:</strong> ${approvedBy}</div>
+                            <div class="user-details"><strong>Approved on:</strong> ${approvedDate}</div>
                         </div>
                     </div>
                 `;
@@ -483,16 +500,25 @@
             
             let html = '';
             submissions.forEach(function(submission) {
-                const date = new Date().toLocaleDateString();
+                // Try to get submission date from different possible fields
+                let submissionDate = 'N/A';
+                if (submission.submittedAt) {
+                    submissionDate = new Date(submission.submittedAt).toLocaleDateString();
+                } else if (submission.createdAt) {
+                    submissionDate = new Date(submission.createdAt).toLocaleDateString();
+                } else {
+                    submissionDate = new Date().toLocaleDateString();
+                }
+                
                 html += `
                     <div class="submission-card">
                         <div class="submission-header">
                             <span class="submission-id">#${submission.id}</span>
-                            <span class="text-muted">${date}</span>
+                            <span class="text-muted">${submissionDate}</span>
                         </div>
-                        <div><strong>Name:</strong> ${submission.name}</div>
-                        <div><strong>Email:</strong> ${submission.email}</div>
-                        <div><strong>Message:</strong> ${submission.message}</div>
+                        <div><strong>Name:</strong> ${submission.name || 'N/A'}</div>
+                        <div><strong>Email:</strong> ${submission.email || 'N/A'}</div>
+                        <div><strong>Message:</strong> ${submission.message || 'N/A'}</div>
                     </div>
                 `;
             });
@@ -502,9 +528,10 @@
         
         function approveUser(userId) {
             const token = localStorage.getItem('jwtToken');
+            const username = localStorage.getItem('username');
             
             $.ajax({
-                url: '/admin/approve-user/' + userId,
+                url: '/admin/approve-user/' + userId + '?approvedBy=' + encodeURIComponent(username),
                 type: 'POST',
                 headers: {
                     'Authorization': 'Bearer ' + token

@@ -26,6 +26,9 @@ public class FormData {
     
     @Column(nullable = false)
     private String message;
+	
+	@Column
+	private java.time.LocalDateTime submittedAt;
 
     public FormData() {
         super();
@@ -67,6 +70,14 @@ public class FormData {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public java.time.LocalDateTime getSubmittedAt() {
+        return submittedAt;
+    }
+
+    public void setSubmittedAt(java.time.LocalDateTime submittedAt) {
+        this.submittedAt = submittedAt;
     }
 
     @Override

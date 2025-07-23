@@ -154,6 +154,7 @@
 
         <div class="register-link">
             <p>Don't have an account? <a href="register.html">Register here</a></p>
+            <p>Check your approval status? <a href="check-status.html">Click here</a></p>
         </div>
     </div>
 
@@ -212,7 +213,16 @@
                     error: function(xhr, status, error) {
                         var errorMessage = 'Login failed. Please check your credentials.';
                         if (xhr.status === 401) {
-                            errorMessage = 'Invalid username or password.';
+                            try {
+                                var response = JSON.parse(xhr.responseText);
+                                if (response.error === 'ACCOUNT_NOT_APPROVED') {
+                                    errorMessage = response.message;
+                                } else {
+                                    errorMessage = 'Invalid username or password.';
+                                }
+                            } catch (e) {
+                                errorMessage = 'Invalid username or password.';
+                            }
                         }
                         showAlert(errorMessage, 'danger');
                     },
