@@ -272,6 +272,10 @@
             $('#searchInput').on('input', function() {
                 filterSubmissions();
             });
+
+            $('#akash-header').css('cursor', 'pointer').on('click', function() {
+                window.location.href = 'index.html';
+            });
         });
         
         function loadDashboard() {

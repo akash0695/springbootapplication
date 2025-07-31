@@ -40,46 +40,38 @@ public class JwtAuthenticationController {
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
-
-		try {
-			authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-
-			final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
-
-			// Get user details including admin status
-			DAOUser user = userDetailsService.findByUsername(authenticationRequest.getUsername());
-			
-			// Check if user is approved (except for admin users)
-			if (!user.getIsAdmin() && !user.getIsApproved()) {
-				Map<String, Object> errorResponse = new HashMap<>();
-				errorResponse.put("error", "ACCOUNT_NOT_APPROVED");
-				errorResponse.put("message", "Your account is not approved yet. Please wait for admin approval.");
-				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
-			}
-			
-			// Generate token with admin status
-			final String token = jwtTokenUtil.generateToken(userDetails, user.getIsAdmin());
-
-			Map<String, Object> response = new HashMap<>();
-			response.put("token", token);
-			response.put("username", user.getUsername());
-			response.put("isAdmin", user.getIsAdmin());
-			response.put("isApproved", user.getIsApproved());
-			response.put("email", user.getEmail());
-			response.put("companyName", user.getCompanyName());
-
-			return ResponseEntity.ok(response);
-		} catch (UsernameNotFoundException e) {
+		DAOUser user = userDetailsService.findByUsername(authenticationRequest.getUsername());
+		if (user == null) {
+			// User does not exist
+			Map<String, Object> errorResponse = new HashMap<>();
+			errorResponse.put("error", "AUTHENTICATION_FAILED");
+			errorResponse.put("message", "Invalid username or password.");
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
+		}
+		if (!user.getIsAdmin() && !user.getIsApproved()) {
 			Map<String, Object> errorResponse = new HashMap<>();
 			errorResponse.put("error", "ACCOUNT_NOT_APPROVED");
-			errorResponse.put("message", e.getMessage());
+			errorResponse.put("message", "Your account is not approved yet. Please contact the administrator or submit feedback for assistance.");
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
+		}
+		try {
+			authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 		} catch (Exception e) {
 			Map<String, Object> errorResponse = new HashMap<>();
 			errorResponse.put("error", "AUTHENTICATION_FAILED");
 			errorResponse.put("message", "Invalid username or password.");
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
 		}
+		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+		final String token = jwtTokenUtil.generateToken(userDetails, user.getIsAdmin());
+		Map<String, Object> response = new HashMap<>();
+		response.put("token", token);
+		response.put("username", user.getUsername());
+		response.put("isAdmin", user.getIsAdmin());
+		response.put("isApproved", user.getIsApproved());
+		response.put("email", user.getEmail());
+		response.put("companyName", user.getCompanyName());
+		return ResponseEntity.ok(response);
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
