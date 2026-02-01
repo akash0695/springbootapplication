@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Development Support - Akash Creations</title>
+    
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/magnific-popup.css" rel="stylesheet">
+    <link href="css/tooplate-waso-strategy.css" rel="stylesheet">
+    
+    <style>
+        .dev-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .dev-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .dev-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .dev-icon {
+            font-size: 3rem;
+            color: #f9c10b;
+            margin-bottom: 20px;
+        }
+        
+        .tech-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #f9c10b, #ffd700);
+            color: #333;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        
+        .monitoring-dashboard {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .metric-card {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 10px;
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #f9c10b;
+        }
+        
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .tool-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .tool-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .navbar-brand {
+            cursor: pointer;
+        }
+        
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+        }
+        
+        .popup-youtube {
+            position: relative;
+            display: block;
+            cursor: pointer;
+        }
+        
+        .popup-youtube:hover .play-overlay {
+            opacity: 1;
+        }
+        
+        .popup-youtube img {
+            transition: transform 0.3s ease;
+        }
+        
+        .popup-youtube:hover img {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-3 col-md-5 col-7">
+                    <p class="text-white mb-0">
+                        <i class="bi-clock site-header-icon me-2"></i>
+                        Mon-Fri 10:00-19:00
+                    </p>
+                </div>
+                <div class="col-lg-2 col-md-3 col-5">
+                    <p class="text-white mb-0">
+                        <a href="tel: +91-9125231250" class="text-white">
+                            <i class="bi-telephone site-header-icon me-2"></i>
+                            +91-9125231250
+                        </a>
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-3 col-12 ms-auto">
+                    <ul class="social-icon">
+                        <li><a href="https://www.facebook.com/" class="social-icon-link bi-facebook"></a></li>
+                        <li><a href="https://twitter.com/shyamgupta101" class="social-icon-link bi-twitter"></a></li>
+                        <li><a href="https://www.youtube.com/channel/UCALzW634oVjYv0rQ9MQx5_w" class="social-icon-link bi-youtube"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg bg-white shadow-lg">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">Akash <span class="text-danger">Creations</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.html">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section d-flex justify-content-center align-items-center" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 60vh;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center text-white">
+                    <h1 class="hero-title">Development Support Center</h1>
+                    <p class="hero-text">Comprehensive resources for Java, Spring Boot, SQL, and monitoring tools</p>
+                    <div class="hero-buttons">
+                        <a href="#java-section" class="btn custom-btn smoothscroll me-3">Java Development</a>
+                        <a href="#spring-section" class="btn custom-btn smoothscroll me-3">Spring Boot</a>
+                        <a href="#sql-section" class="btn custom-btn smoothscroll me-3">Database</a>
+                        <a href="#monitoring-section" class="btn custom-btn smoothscroll">Monitoring</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Java Development Section -->
+    <section id="java-section" class="dev-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center text-white mb-5">
+                    <h2><i class="bi bi-cup-hot"></i> Java Development</h2>
+                    <p>Master Java programming with our comprehensive resources</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="dev-card">
+                        <div class="dev-icon text-center">
+                            <i class="bi bi-code-slash"></i>
+                        </div>
+                        <h4>Core Java</h4>
+                        <p>Learn fundamental Java concepts, OOP principles, and best practices.</p>
+                        <div class="tech-badges">
+                            <span class="tech-badge">Java 8+</span>
+                            <span class="tech-badge">OOP</span>
+                            <span class="tech-badge">Collections</span>
+                            <span class="tech-badge">Streams</span>
+                        </div>
+                        <div class="code-block">
+                            <pre><code>// Java 8 Streams Example
+List&lt;String&gt; names = Arrays.asList("John", "Jane", "Bob");
+names.stream()
+    .filter(name -> name.startsWith("J"))
+    .map(String::toUpperCase)
+    .forEach(System.out::println);</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="dev-card">
+                        <div class="dev-icon text-center">
+                            <i class="bi bi-gear"></i>
+                        </div>
+                        <h4>Advanced Java</h4>
+                        <p>Master advanced Java features including multithreading, reflection, and annotations.</p>
+                        <div class="tech-badges">
+                            <span class="tech-badge">Multithreading</span>
+                            <span class="tech-badge">Reflection</span>
+                            <span class="tech-badge">Annotations</span>
+                            <span class="tech-badge">Generics</span>
+                        </div>
+                        <div class="code-block">
+                            <pre><code>// Custom Annotation Example
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface LogExecutionTime {
+    String value() default "";
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="dev-card">
+                        <div class="dev-icon text-center">
+                            <i class="bi bi-tools"></i>
+                        </div>
+                        <h4>Java Tools</h4>
+                        <p>Essential tools for Java development and debugging.</p>
+                        <div class="tool-grid">
+                            <div class="tool-item">
+                                <i class="bi bi-bug"></i>
+                                <h6>JUnit</h6>
+                                <small>Unit Testing</small>
+                            </div>
+                            <div class="tool-item">
+                                <i class="bi bi-graph-up"></i>
+                                <h6>Maven</h6>
+                                <small>Build Tool</small>
+                            </div>
+                            <div class="tool-item">
+                                <i class="bi bi-code-square"></i>
+                                <h6>IDE</h6>
+                                <small>IntelliJ IDEA</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Java Development Videos Section -->
+    <section class="dev-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center text-white mb-5">
+                    <h2><i class="bi bi-play-circle"></i> Java Development Tutorials</h2>
+                    <p>Learn Java programming with our curated video tutorials</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="dev-card">
+                        <div class="text-center mb-3">
+                            <a href="https://www.youtube.com/watch?v=vtPkZShrvXQ" class="popup-youtube">
+                                <img src="https://img.youtube.com/vi/vtPkZShrvXQ/mqdefault.jpg" alt="Java Full Course" class="img-fluid rounded" style="width: 100%; height: 200px; object-fit: cover;">
+                                <div class="play-overlay">
+                                    <i class="bi bi-play-circle-fill" style="font-size: 3rem; color: #f9c10b;"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <h5>Java Full Course for Beginners</h5>
+                        <p>Complete Java programming tutorial covering fundamentals, OOP, and advanced concepts.</p>
+                        <div class="tech-badges">
+                            <span class="tech-badge">Java Basics</span>
+                            <span class="tech-badge">OOP</span>
+                            <span class="tech-badge">Collections</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="dev-card">
+                        <div class="text-center mb-3">
+                            <a href="https://www.youtube.com/watch?v=9SGDpanrc8U" class="popup-youtube">
+                                <img src="https://img.youtube.com/vi/9SGDpanrc8U/mqdefault.jpg" alt="Spring Boot Tutorial" class="img-fluid rounded" style="width: 100%; height: 200px; object-fit: cover;">
+                                <div class="play-overlay">
+                                    <i class="bi bi-play-circle-fill" style="font-size: 3rem; color: #f9c10b;"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <h5>Spring Boot Tutorial for Beginners</h5>
+                        <p>Learn Spring Boot framework from scratch with practical examples and REST API development.</p>
+                        <div class="tech-badges">
+                            <span class="tech-badge">Spring Boot</span>
+                            <span class="tech-badge">REST APIs</span>
+                            <span class="tech-badge">Maven</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="dev-card">
+                        <div class="text-center mb-3">
+                            <a href="https://www.youtube.com/watch?v=WwB1X-1hSee" class="popup-youtube">
+                                <img src="https://img.youtube.com/vi/WwB1X-1hSee/mqdefault.jpg" alt="Database Design" class="img-fluid rounded" style="width: 100%; height: 200px; object-fit: cover;">
+                                <div class="play-overlay">
+                                    <i class="bi bi-play-circle-fill" style="font-size: 3rem; color: #f9c10b;"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <h5>Database Design Tutorial</h5>
+                        <p>Master database design principles, SQL optimization, and data modeling techniques.</p>
+                        <div class="tech-badges">
+                            <span class="tech-badge">SQL</span>
+                            <span class="tech-badge">Database Design</span>
+                            <span class="tech-badge">ERD</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spring Boot Section -->
+    <section id="spring-section" class="dev-section" style="background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center text-white mb-5">
+                    <h2><i class="bi bi-spring"></i> Spring Boot Development</h2>
+                    <p>Build robust applications with Spring Boot framework</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="dev-card">
+                        <div class="dev-icon text-center">
+                            <i class="bi bi-server"></i>
+                        </div>
+                        <h4>Spring Boot Basics</h4>
+                        <p>Create RESTful APIs and web applications with Spring Boot.</p>
+                        <div class="code-block">
+                            <pre><code>@RestController
+@RequestMapping("/api")
+public class UserController {
+    
+    @Autowired
+    private UserService userService;
+    
+    @GetMapping("/users")
+    public ResponseEntity&lt;List&lt;User&gt;&gt; getAllUsers() {
+        return ResponseEntity.ok(userService.findAll());
+    }
+}</code></pre>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">REST APIs</span>
+                            <span class="tech-badge">Dependency Injection</span>
+                            <span class="tech-badge">Auto-configuration</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="dev-card">
+                        <div class="dev-icon text-center">
+                            <i class="bi bi-database"></i>
+                        </div>
+                        <h4>Spring Data JPA</h4>
+                        <p>Database integration with Spring Data JPA and Hibernate.</p>
+                        <div class="code-block">
+                            <pre><code>@Repository
+public interface UserRepository extends JpaRepository&lt;User, Long&gt; {
+    List&lt;User&gt; findByEmail(String email);
+    Optional&lt;User&gt; findByUsername(String username);
+    @Query("SELECT u FROM User u WHERE u.active = true")
+    List&lt;User&gt; findActiveUsers();
+}</code></pre>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">JPA</span>
+                            <span class="tech-badge">Hibernate</span>
+                            <span class="tech-badge">Repository Pattern</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-lg-12">
+                    <div class="dev-card">
+                        <h4>Spring Boot Configuration</h4>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h6>application.properties</h6>
+                                <div class="code-block">
+                                    <pre><code># Database Configuration
+spring.datasource.url=jdbc:mysql://localhost:3306/mydb
+spring.datasource.username=root
+spring.datasource.password=password
+spring.jpa.hibernate.ddl-auto=update
+
+# JWT Configuration
+jwt.secret=mySecretKey
+jwt.expiration=86400000</code></pre>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <h6>Security Configuration</h6>
+                                <div class="code-block">
+                                    <pre><code>@Configuration
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+            .authorizeRequests()
+            .antMatchers("/api/public/**").permitAll()
+            .anyRequest().authenticated();
+    }
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spring Boot & Database Videos Section -->
+    <section class="dev-section" style="background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center text-white mb-5">
+                    <h2><i class="bi bi-play-circle"></i> Spring Boot & Database Tutorials</h2>
+                    <p>Advanced tutorials for Spring Boot and database development</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="dev-card">
+                        <div class="text-center mb-3">
+                            <a href="https://www.youtube.com/watch?v=9SGDpanrc8U" class="popup-youtube">
+                                <img src="https://img.youtube.com/vi/9SGDpanrc8U/mqdefault.jpg" alt="Spring Boot Tutorial" class="img-fluid rounded" style="width: 100%; height: 200px; object-fit: cover;">
+                                <div class="play-overlay">
+                                    <i class="bi bi-play-circle-fill" style="font-size: 3rem; color: #f9c10b;"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <h5>Spring Boot REST API Tutorial</h5>
+                        <p>Build complete REST APIs with Spring Boot, JPA, and MySQL database integration.</p>
+                        <div class="tech-badges">
+                            <span class="tech-badge">Spring Boot</span>
+                            <span class="tech-badge">REST API</span>
+                            <span class="tech-badge">JPA</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="dev-card">
+                        <div class="text-center mb-3">
+                            <a href="https://www.youtube.com/watch?v=WwB1X-1hSee" class="popup-youtube">
+                                <img src="https://img.youtube.com/vi/WwB1X-1hSee/mqdefault.jpg" alt="Database Design" class="img-fluid rounded" style="width: 100%; height: 200px; object-fit: cover;">
+                                <div class="play-overlay">
+                                    <i class="bi bi-play-circle-fill" style="font-size: 3rem; color: #f9c10b;"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <h5>Database Design & SQL Tutorial</h5>
+                        <p>Learn database design principles, normalization, and SQL optimization techniques.</p>
+                        <div class="tech-badges">
+                            <span class="tech-badge">Database Design</span>
+                            <span class="tech-badge">SQL</span>
+                            <span class="tech-badge">Normalization</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="dev-card">
+                        <div class="text-center mb-3">
+                            <a href="https://www.youtube.com/watch?v=J9WCalcsDT8" class="popup-youtube">
+                                <img src="https://img.youtube.com/vi/J9WCalcsDT8/mqdefault.jpg" alt="JWT Authentication" class="img-fluid rounded" style="width: 100%; height: 200px; object-fit: cover;">
+                                <div class="play-overlay">
+                                    <i class="bi bi-play-circle-fill" style="font-size: 3rem; color: #f9c10b;"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <h5>JWT Authentication in Spring Boot</h5>
+                        <p>Implement secure JWT authentication and authorization in Spring Boot applications.</p>
+                        <div class="tech-badges">
+                            <span class="tech-badge">JWT</span>
+                            <span class="tech-badge">Security</span>
+                            <span class="tech-badge">Authentication</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SQL Database Section -->
+    <section id="sql-section" class="dev-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center text-white mb-5">
+                    <h2><i class="bi bi-database"></i> Database & SQL</h2>
+                    <p>Master database design and SQL optimization</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="dev-card">
+                        <div class="dev-icon text-center">
+                            <i class="bi bi-table"></i>
+                        </div>
+                        <h4>SQL Fundamentals</h4>
+                        <p>Learn essential SQL commands and database operations.</p>
+                        <div class="code-block">
+                            <pre><code>-- Create table with constraints
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert data
+INSERT INTO users (username, email) 
+VALUES ('john_doe', 'john@example.com');</code></pre>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">MySQL</span>
+                            <span class="tech-badge">PostgreSQL</span>
+                            <span class="tech-badge">SQL Server</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="dev-card">
+                        <div class="dev-icon text-center">
+                            <i class="bi bi-search"></i>
+                        </div>
+                        <h4>Advanced Queries</h4>
+                        <p>Complex queries, joins, and performance optimization.</p>
+                        <div class="code-block">
+                            <pre><code>-- Complex JOIN with aggregation
+SELECT 
+    u.username,
+    COUNT(o.id) as order_count,
+    SUM(o.total_amount) as total_spent
+FROM users u
+LEFT JOIN orders o ON u.id = o.user_id
+WHERE u.created_at >= '2024-01-01'
+GROUP BY u.id, u.username
+HAVING total_spent > 1000
+ORDER BY total_spent DESC;</code></pre>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">JOINs</span>
+                            <span class="tech-badge">Subqueries</span>
+                            <span class="tech-badge">Indexing</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="dev-card">
+                        <div class="dev-icon text-center">
+                            <i class="bi bi-graph-up"></i>
+                        </div>
+                        <h4>Database Design</h4>
+                        <p>ERD modeling, normalization, and best practices.</p>
+                        <div class="code-block">
+                            <pre><code>-- Many-to-Many relationship
+CREATE TABLE user_roles (
+    user_id INT,
+    role_id INT,
+    PRIMARY KEY (user_id, role_id),
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (role_id) REFERENCES roles(id)
+);</code></pre>
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">ERD</span>
+                            <span class="tech-badge">Normalization</span>
+                            <span class="tech-badge">ACID</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Monitoring & DevOps Videos Section -->
+    <section class="dev-section" style="background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center text-white mb-5">
+                    <h2><i class="bi bi-play-circle"></i> Monitoring & DevOps Tutorials</h2>
+                    <p>Learn monitoring, DevOps, and deployment strategies</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="dev-card">
+                        <div class="text-center mb-3">
+                            <a href="https://www.youtube.com/watch?v=9SGDpanrc8U" class="popup-youtube">
+                                <img src="https://img.youtube.com/vi/9SGDpanrc8U/mqdefault.jpg" alt="Grafana Tutorial" class="img-fluid rounded" style="width: 100%; height: 200px; object-fit: cover;">
+                                <div class="play-overlay">
+                                    <i class="bi bi-play-circle-fill" style="font-size: 3rem; color: #f9c10b;"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <h5>Grafana Dashboard Tutorial</h5>
+                        <p>Create beautiful dashboards and visualizations with Grafana for application monitoring.</p>
+                        <div class="tech-badges">
+                            <span class="tech-badge">Grafana</span>
+                            <span class="tech-badge">Monitoring</span>
+                            <span class="tech-badge">Dashboards</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="dev-card">
+                        <div class="text-center mb-3">
+                            <a href="https://www.youtube.com/watch?v=vtPkZShrvXQ" class="popup-youtube">
+                                <img src="https://img.youtube.com/vi/vtPkZShrvXQ/mqdefault.jpg" alt="Docker Tutorial" class="img-fluid rounded" style="width: 100%; height: 200px; object-fit: cover;">
+                                <div class="play-overlay">
+                                    <i class="bi bi-play-circle-fill" style="font-size: 3rem; color: #f9c10b;"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <h5>Docker & Containerization</h5>
+                        <p>Learn Docker containerization and deployment strategies for modern applications.</p>
+                        <div class="tech-badges">
+                            <span class="tech-badge">Docker</span>
+                            <span class="tech-badge">Containers</span>
+                            <span class="tech-badge">Deployment</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="dev-card">
+                        <div class="text-center mb-3">
+                            <a href="https://www.youtube.com/watch?v=WwB1X-1hSee" class="popup-youtube">
+                                <img src="https://img.youtube.com/vi/WwB1X-1hSee/mqdefault.jpg" alt="CI/CD Pipeline" class="img-fluid rounded" style="width: 100%; height: 200px; object-fit: cover;">
+                                <div class="play-overlay">
+                                    <i class="bi bi-play-circle-fill" style="font-size: 3rem; color: #f9c10b;"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <h5>CI/CD Pipeline Implementation</h5>
+                        <p>Set up continuous integration and deployment pipelines for automated testing and deployment.</p>
+                        <div class="tech-badges">
+                            <span class="tech-badge">CI/CD</span>
+                            <span class="tech-badge">Jenkins</span>
+                            <span class="tech-badge">GitHub Actions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Monitoring & Tools Section -->
+    <section id="monitoring-section" class="dev-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center text-white mb-5">
+                    <h2><i class="bi bi-speedometer2"></i> Monitoring & Tools</h2>
+                    <p>Comprehensive monitoring and development tools</p>
+                </div>
+            </div>
+            
+            <!-- Grafana Dashboard -->
+            <div class="monitoring-dashboard">
+                <h3><i class="bi bi-graph-up"></i> Grafana Dashboard</h3>
+                <p>Real-time monitoring and visualization platform</p>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="metric-card">
+                            <div class="metric-value">99.9%</div>
+                            <div>Uptime</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="metric-card">
+                            <div class="metric-value">150ms</div>
+                            <div>Response Time</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="metric-card">
+                            <div class="metric-value">1.2K</div>
+                            <div>Requests/min</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="metric-card">
+                            <div class="metric-value">85%</div>
+                            <div>CPU Usage</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Development Tools -->
+            <div class="row mt-5">
+                <div class="col-lg-6">
+                    <div class="dev-card">
+                        <h4><i class="bi bi-tools"></i> Development Tools</h4>
+                        <div class="tool-grid">
+                            <div class="tool-item">
+                                <i class="bi bi-git"></i>
+                                <h6>Git</h6>
+                                <small>Version Control</small>
+                            </div>
+                            <div class="tool-item">
+                                <i class="bi bi-bug"></i>
+                                <h6>Postman</h6>
+                                <small>API Testing</small>
+                            </div>
+                            <div class="tool-item">
+                                <i class="bi bi-code-square"></i>
+                                <h6>VS Code</h6>
+                                <small>Code Editor</small>
+                            </div>
+                            <div class="tool-item">
+                                <i class="bi bi-terminal"></i>
+                                <h6>Docker</h6>
+                                <small>Containerization</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="dev-card">
+                        <h4><i class="bi bi-shield-check"></i> Monitoring Tools</h4>
+                        <div class="tool-grid">
+                            <div class="tool-item">
+                                <i class="bi bi-graph-up"></i>
+                                <h6>Prometheus</h6>
+                                <small>Metrics Collection</small>
+                            </div>
+                            <div class="tool-item">
+                                <i class="bi bi-eye"></i>
+                                <h6>ELK Stack</h6>
+                                <small>Log Management</small>
+                            </div>
+                            <div class="tool-item">
+                                <i class="bi bi-activity"></i>
+                                <h6>New Relic</h6>
+                                <small>APM</small>
+                            </div>
+                            <div class="tool-item">
+                                <i class="bi bi-cpu"></i>
+                                <h6>Datadog</h6>
+                                <small>Infrastructure</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Configuration Examples -->
+            <div class="row mt-4">
+                <div class="col-lg-12">
+                    <div class="dev-card">
+                        <h4>Monitoring Configuration</h4>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h6>Prometheus Configuration</h6>
+                                <div class="code-block">
+                                    <pre><code>global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'spring-boot-app'
+    static_configs:
+      - targets: ['localhost:8080']
+    metrics_path: '/actuator/prometheus'</code></pre>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <h6>Grafana Dashboard</h6>
+                                <div class="code-block">
+                                    <pre><code>{
+  "dashboard": {
+    "title": "Spring Boot Metrics",
+    "panels": [
+      {
+        "title": "HTTP Requests",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(http_requests_total[5m])"
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Reference Section -->
+    <section class="dev-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center text-white mb-5">
+                    <h2><i class="bi bi-book"></i> Quick Reference</h2>
+                    <p>Essential commands and configurations</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="dev-card">
+                        <h5>Maven Commands</h5>
+                        <div class="code-block">
+                            <pre><code>mvn clean install
+mvn spring-boot:run
+mvn test
+mvn dependency:tree</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="dev-card">
+                        <h5>Git Commands</h5>
+                        <div class="code-block">
+                            <pre><code>git add .
+git commit -m "message"
+git push origin main
+git pull origin main</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="dev-card">
+                        <h5>Docker Commands</h5>
+                        <div class="code-block">
+                            <pre><code>docker build -t app .
+docker run -p 8080:8080 app
+docker-compose up
+docker logs container</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="dev-card">
+                        <h5>SQL Commands</h5>
+                        <div class="code-block">
+                            <pre><code>SELECT * FROM users;
+INSERT INTO users VALUES (...);
+UPDATE users SET ...;
+DELETE FROM users WHERE ...;</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <p class="copyright-text">Copyright © 2024 Akash Creations. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.sticky.js"></script>
+    <script src="js/click-scroll.js"></script>
+    <script src="js/custom.js"></script>
+    
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Add click handler for navbar brand
+        document.querySelector('.navbar-brand').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+        
+        // Initialize Magnific Popup for YouTube videos
+        $(document).ready(function() {
+            $('.popup-youtube').magnificPopup({
+                type: 'iframe',
+                mainClass: 'mfp-fade',
+                removalDelay: 160,
+                preloader: false,
+                fixedContentPos: false,
+                iframe: {
+                    patterns: {
+                        youtube: {
+                            index: 'youtube.com/',
+                            id: 'v=',
+                            src: '//www.youtube.com/embed/%id%?autoplay=1'
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

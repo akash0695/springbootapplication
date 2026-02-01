@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query Management Dashboard - Akash Creations</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/tooplate-waso-strategy.css" rel="stylesheet">
+    <style>
+        .query-card { background: white; border-radius: 15px; padding: 25px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .status-badge { padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+        .status-new { background: #e3f2fd; color: #1976d2; }
+        .status-assigned { background: #fff3e0; color: #f57c00; }
+        .status-in-progress { background: #e8f5e8; color: #388e3c; }
+        .status-resolved { background: #f3e5f5; color: #7b1fa2; }
+        .status-closed { background: #ffebee; color: #d32f2f; }
+        .btn-assign { background: linear-gradient(45deg, #f9c10b, #ffd700); border: none; color: #333; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-white shadow-lg">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">Akash <span class="text-danger">Creations</span></a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="dashboard.html">Dashboard</a>
+                <a class="nav-link" href="assigned-queries.html">My Assigned Queries</a>
+                <a class="nav-link" href="#" onclick="logout()">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="py-5">
+        <div class="container">
+            <h1 class="text-center mb-4"><i class="bi bi-chat-dots text-warning"></i> Query Management Dashboard</h1>
+            
+            <div class="row mb-4">
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="bg-primary text-white p-3 rounded text-center">
+                        <h3 id="unassignedCount">0</h3>
+                        <p>Unassigned Queries</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="bg-success text-white p-3 rounded text-center">
+                        <h3 id="assignedCount">0</h3>
+                        <p>Assigned Queries</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="bg-warning text-white p-3 rounded text-center">
+                        <h3 id="inProgressCount">0</h3>
+                        <p>In Progress</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="bg-info text-white p-3 rounded text-center">
+                        <h3 id="resolvedCount">0</h3>
+                        <p>Resolved</p>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="nav nav-tabs mb-4">
+                <li class="nav-item">
+                    <button class="nav-link active" id="unassigned-tab" onclick="loadUnassignedQueries()">
+                        <i class="bi bi-exclamation-circle"></i> Unassigned Queries
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id="assigned-tab" onclick="loadAssignedQueries()">
+                        <i class="bi bi-person-check"></i> Assigned Queries
+                    </button>
+                </li>
+            </ul>
+
+            <div id="queriesList">
+                <!-- Queries will be loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            if (!localStorage.getItem('jwtToken')) {
+                window.location.href = 'login.html';
+                return;
+            }
+            loadStatistics();
+            loadUnassignedQueries();
+        });
+        
+        function loadStatistics() {
+            $.ajax({
+                url: '/api/queries/statistics',
+                type: 'GET',
+                headers: { 'Authorization': 'Bearer ' + localStorage.getItem('jwtToken') },
+                success: function(data) {
+                    $('#unassignedCount').text(data.unassigned || 0);
+                    $('#assignedCount').text(data.assigned || 0);
+                    $('#inProgressCount').text(data.inProgress || 0);
+                    $('#resolvedCount').text(data.resolved || 0);
+                }
+            });
+        }
+        
+        function loadUnassignedQueries() {
+            $('#unassigned-tab').addClass('active');
+            $('#assigned-tab').removeClass('active');
+            
+            $.ajax({
+                url: '/api/queries/unassigned',
+                type: 'GET',
+                headers: { 'Authorization': 'Bearer ' + localStorage.getItem('jwtToken') },
+                success: function(data) {
+                    displayQueries(data, true);
+                }
+            });
+        }
+        
+        function loadAssignedQueries() {
+            $('#assigned-tab').addClass('active');
+            $('#unassigned-tab').removeClass('active');
+            
+            $.ajax({
+                url: '/api/queries/my-assigned',
+                type: 'GET',
+                headers: { 'Authorization': 'Bearer ' + localStorage.getItem('jwtToken') },
+                success: function(data) {
+                    displayQueries(data, false);
+                }
+            });
+        }
+        
+        function displayQueries(queries, showAssignButton) {
+            const container = $('#queriesList');
+            container.empty();
+            
+            if (queries.length === 0) {
+                container.html('<div class="text-center text-muted py-5"><i class="bi bi-inbox fs-1"></i><p class="mt-3">No queries found</p></div>');
+                return;
+            }
+            
+            queries.forEach(query => {
+                const statusClass = 'status-' + query.status.toLowerCase().replace('_', '-');
+                const assignButton = showAssignButton ? 
+                    `<button class="btn btn-assign btn-sm" onclick="assignToSelf(${query.id})">
+                        <i class="bi bi-person-plus"></i> Assign to Self
+                    </button>` : '';
+                
+                const queryCard = `
+                    <div class="query-card">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h5 class="mb-1">${query.name}</h5>
+                                <div class="text-muted">
+                                    <i class="bi bi-envelope"></i> ${query.email} | 
+                                    <i class="bi bi-calendar"></i> ${new Date(query.createdAt).toLocaleDateString()}
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="status-badge ${statusClass}">${query.status}</span>
+                                ${assignButton}
+                            </div>
+                        </div>
+                        <div class="bg-light p-3 rounded mb-3">
+                            <strong>Message:</strong><br>
+                            ${query.message}
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button class="btn btn-outline-primary btn-sm" onclick="viewQueryDetails(${query.id})">
+                                <i class="bi bi-eye"></i> View Details
+                            </button>
+                            <small class="text-muted">ID: #${query.id}</small>
+                        </div>
+                    </div>
+                `;
+                container.append(queryCard);
+            });
+        }
+        
+        function assignToSelf(queryId) {
+            $.ajax({
+                url: `/api/queries/${queryId}/assign-to-self`,
+                type: 'POST',
+                headers: { 'Authorization': 'Bearer ' + localStorage.getItem('jwtToken') },
+                success: function(response) {
+                    alert('Query assigned successfully!');
+                    loadStatistics();
+                    loadUnassignedQueries();
+                },
+                error: function(xhr) {
+                    alert('Error assigning query: ' + xhr.responseText);
+                }
+            });
+        }
+        
+        function viewQueryDetails(queryId) {
+            // This would open a modal with query details
+            alert('Query details for ID: ' + queryId);
+        }
+        
+        function logout() {
+            localStorage.removeItem('jwtToken');
+            localStorage.removeItem('username');
+            localStorage.removeItem('isAdmin');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html> 

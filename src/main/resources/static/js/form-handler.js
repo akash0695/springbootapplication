@@ -24,11 +24,14 @@ $(document).ready(function() {
         
         // Submit form to backend
         $.ajax({
-            url: '/form',
+            url: '/api/queries/submit',
             type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
+            contentType: 'application/json',
+            data: JSON.stringify({
+                name: name,
+                email: email,
+                message: message
+            }),
             success: function(response) {
                 // Show success message
                 alert('Thank you for your interest! We will connect with you shortly.');

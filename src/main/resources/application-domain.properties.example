@@ -1,0 +1,51 @@
+# Domain SSL Configuration Example
+# Copy these settings to your application.properties for domain access
+
+# ============================================
+# Domain SSL Configuration (Production)
+# ============================================
+
+# Enable SSL
+server.ssl.enabled=true
+
+# Let's Encrypt certificate path (update with your domain)
+server.ssl.key-store=/etc/letsencrypt/live/yourdomain.com/keystore.p12
+
+# Use environment variable for password (recommended)
+server.ssl.key-store-password=${SSL_KEYSTORE_PASSWORD}
+
+# Or hardcode for testing (NOT recommended for production)
+# server.ssl.key-store-password=your-password
+
+# Keystore type
+server.ssl.key-store-type=PKCS12
+
+# Key alias (usually "springboot")
+server.ssl.key-alias=springboot
+
+# Standard HTTPS port (requires root or reverse proxy)
+server.port=443
+
+# Alternative: Use port 8443 if you don't have root access
+# server.port=8443
+
+# HTTP port for redirect (optional)
+server.http.port=80
+
+# Allow external connections (required for domain access)
+server.address=0.0.0.0
+
+# ============================================
+# Environment Variable Setup
+# ============================================
+# Set this before starting the application:
+# 
+# Linux/Mac:
+#   export SSL_KEYSTORE_PASSWORD=your-secure-password
+#
+# Windows (Command Prompt):
+#   set SSL_KEYSTORE_PASSWORD=your-secure-password
+#
+# Windows (PowerShell):
+#   $env:SSL_KEYSTORE_PASSWORD="your-secure-password"
+# ============================================
