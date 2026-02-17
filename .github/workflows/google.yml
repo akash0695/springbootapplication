@@ -1,9 +1,0 @@
-env:
-  PROJECT_ID: 'nodal-crawler-460115-d2'
-  GAR_LOCATION: 'us-central1'
-  GKE_CLUSTER: 'instance-20260123-222317'  # Update this
-  GKE_ZONE: 'us-central1-c'
-  DEPLOYMENT_NAME: 'your-app-deployment'
-  REPOSITORY: 'springbootapplication'  # Update this
-  IMAGE: 'static-site'
-  WORKLOAD_IDENTITY_PROVIDER: 'projects/YOUR_PROJECT_NUMBER/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
