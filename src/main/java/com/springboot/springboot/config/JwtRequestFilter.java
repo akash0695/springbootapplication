@@ -45,9 +45,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 			} catch (Exception e) {
 				System.out.println("JWT Token has expired");
 			}
-		} else {
+		} else if (requestTokenHeader != null && !requestTokenHeader.startsWith("Bearer ")) {
+			// Only log warning if Authorization header exists but doesn't start with "Bearer"
+			// This indicates a malformed token, not a missing one (which is normal for public pages)
 			logger.warn("JWT Token does not begin with Bearer String");
 		}
+		// If requestTokenHeader is null, it's likely a public endpoint - no warning needed
 
 		// Once we get the token validate it.
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {

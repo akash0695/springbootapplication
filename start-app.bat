@@ -33,6 +33,9 @@ echo - http://localhost:8080/test.html (test page)
 echo - http://localhost:8080/check-status.html (status check)
 echo.
 
+echo Setting optimized memory options...
+set MAVEN_OPTS=-Xms128m -Xmx384m -XX:MetaspaceSize=64m -XX:MaxMetaspaceSize=128m -XX:+UseG1GC -XX:+UseStringDeduplication -XX:MaxGCPauseMillis=200
+
 .\mvnw.cmd spring-boot:run
 
 pause 

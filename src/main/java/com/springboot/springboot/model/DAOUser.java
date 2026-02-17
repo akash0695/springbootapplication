@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users") // Changed from 'user' to 'users' to avoid reserved keyword issues and match DB
 public class DAOUser {
 
 	@Id
@@ -103,4 +103,7 @@ public class DAOUser {
 		this.approvedAt = approvedAt;
 	}
 
+	public long getId() {
+		return id;
+	}
 }

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Assigned Queries - Akash Creations</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/tooplate-waso-strategy.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-white shadow-lg">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">Akash <span class="text-danger">Creations</span></a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="dashboard.html">Dashboard</a>
+                <a class="nav-link" href="query-dashboard.html">Query Management</a>
+                <a class="nav-link" href="#" onclick="logout()">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="py-5">
+        <div class="container">
+            <h1 class="text-center mb-4"><i class="bi bi-person-check text-warning"></i> My Assigned Queries</h1>
+            
+            <div id="assignedQueriesList">
+                <!-- Assigned queries will be loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Query Detail Modal -->
+    <div class="modal fade" id="queryDetailModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Query Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="queryDetailContent">
+                    <!-- Query details will be loaded here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning" onclick="updateQueryStatus()">Update Status</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Notes Modal -->
+    <div class="modal fade" id="addNotesModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Notes</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <textarea class="form-control" id="notesTextarea" rows="5" placeholder="Enter your notes here..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="saveNotes()">Save Notes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    
+    <script>
+        let currentQueryId = null;
+        
+        $(document).ready(function() {
+            if (!localStorage.getItem('jwtToken')) {
+                window.location.href = 'login.html';
+                return;
+            }
+            loadAssignedQueries();
+        });
+        
+        function loadAssignedQueries() {
+            $.ajax({
+                url: '/api/queries/my-assigned',
+                type: 'GET',
+                headers: { 'Authorization': 'Bearer ' + localStorage.getItem('jwtToken') },
+                success: function(data) {
+                    displayAssignedQueries(data);
+                },
+                error: function(xhr) {
+                    console.error('Error loading assigned queries:', xhr);
+                }
+            });
+        }
+        
+        function displayAssignedQueries(queries) {
+            const container = $('#assignedQueriesList');
+            container.empty();
+            
+            if (queries.length === 0) {
+                container.html('<div class="text-center text-muted py-5"><i class="bi bi-inbox fs-1"></i><p class="mt-3">No assigned queries found</p></div>');
+                return;
+            }
+            
+            queries.forEach(query => {
+                const statusClass = 'status-' + query.status.toLowerCase().replace('_', '-');
+                const queryCard = `
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div>
+                                    <h5 class="card-title">${query.name}</h5>
+                                    <p class="text-muted mb-1">
+                                        <i class="bi bi-envelope"></i> ${query.email} | 
+                                        <i class="bi bi-calendar"></i> ${new Date(query.createdAt).toLocaleDateString()}
+                                    </p>
+                                    <p class="text-muted mb-0">
+                                        <i class="bi bi-person"></i> Assigned by: ${query.assignedBy} | 
+                                        <i class="bi bi-clock"></i> ${new Date(query.assignedAt).toLocaleDateString()}
+                                    </p>
+                                </div>
+                                <span class="badge ${statusClass}">${query.status}</span>
+                            </div>
+                            <div class="bg-light p-3 rounded mb-3">
+                                <strong>Message:</strong><br>
+                                ${query.message}
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-outline-primary btn-sm" onclick="viewQueryDetails(${query.id})">
+                                    <i class="bi bi-eye"></i> View Details
+                                </button>
+                                <button class="btn btn-outline-success btn-sm" onclick="addNotes(${query.id})">
+                                    <i class="bi bi-pencil"></i> Add Notes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.append(queryCard);
+            });
+        }
+        
+        function viewQueryDetails(queryId) {
+            $.ajax({
+                url: `/api/queries/${queryId}`,
+                type: 'GET',
+                headers: { 'Authorization': 'Bearer ' + localStorage.getItem('jwtToken') },
+                success: function(query) {
+                    currentQueryId = queryId;
+                    displayQueryDetails(query);
+                    $('#queryDetailModal').modal('show');
+                }
+            });
+        }
+        
+        function displayQueryDetails(query) {
+            const statusClass = 'status-' + query.status.toLowerCase().replace('_', '-');
+            const notes = query.notes ? 
+                `<div class="mt-3">
+                    <h6>Notes:</h6>
+                    <div class="bg-light p-3 rounded">${query.notes.replace(/\n/g, '<br>')}</div>
+                </div>` : '<p class="text-muted">No notes added yet.</p>';
+            
+            $('#queryDetailContent').html(`
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Customer Information</h6>
+                        <p><strong>Name:</strong> ${query.name}</p>
+                        <p><strong>Email:</strong> ${query.email}</p>
+                        <p><strong>Created:</strong> ${new Date(query.createdAt).toLocaleString()}</p>
+                        <p><strong>Status:</strong> <span class="badge ${statusClass}">${query.status}</span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Assignment Information</h6>
+                        <p><strong>Assigned to:</strong> ${query.assignedTo.username}</p>
+                        <p><strong>Assigned by:</strong> ${query.assignedBy}</p>
+                        <p><strong>Assigned at:</strong> ${new Date(query.assignedAt).toLocaleString()}</p>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <h6>Message:</h6>
+                    <div class="bg-light p-3 rounded">${query.message}</div>
+                </div>
+                ${notes}
+            `);
+        }
+        
+        function addNotes(queryId) {
+            currentQueryId = queryId;
+            $('#notesTextarea').val('');
+            $('#addNotesModal').modal('show');
+        }
+        
+        function saveNotes() {
+            const notes = $('#notesTextarea').val();
+            if (!notes.trim()) {
+                alert('Please enter some notes');
+                return;
+            }
+            
+            $.ajax({
+                url: `/api/queries/${currentQueryId}/notes`,
+                type: 'POST',
+                headers: { 'Authorization': 'Bearer ' + localStorage.getItem('jwtToken') },
+                contentType: 'application/json',
+                data: JSON.stringify({ notes: notes }),
+                success: function(response) {
+                    $('#addNotesModal').modal('hide');
+                    alert('Notes added successfully!');
+                    loadAssignedQueries();
+                },
+                error: function(xhr) {
+                    alert('Error adding notes: ' + xhr.responseText);
+                }
+            });
+        }
+        
+        function updateQueryStatus() {
+            const statuses = ['NEW', 'ASSIGNED', 'IN_PROGRESS', 'RESOLVED', 'CLOSED'];
+            const newStatus = prompt('Enter new status: ' + statuses.join(', '));
+            
+            if (newStatus && statuses.includes(newStatus.toUpperCase())) {
+                $.ajax({
+                    url: `/api/queries/${currentQueryId}/status`,
+                    type: 'PUT',
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem('jwtToken') },
+                    contentType: 'application/json',
+                    data: JSON.stringify({ status: newStatus.toUpperCase() }),
+                    success: function(response) {
+                        $('#queryDetailModal').modal('hide');
+                        alert('Status updated successfully!');
+                        loadAssignedQueries();
+                    },
+                    error: function(xhr) {
+                        alert('Error updating status: ' + xhr.responseText);
+                    }
+                });
+            }
+        }
+        
+        function logout() {
+            localStorage.removeItem('jwtToken');
+            localStorage.removeItem('username');
+            localStorage.removeItem('isAdmin');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html> 

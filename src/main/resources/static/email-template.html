@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Development Support Email - Akash Creations</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #f4f4f4;
+        }
+        
+        .email-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .section h2 {
+            color: #667eea;
+            border-bottom: 2px solid #f9c10b;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .tech-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #f9c10b;
+        }
+        
+        .tech-item h4 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        
+        .tech-item p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        .metric-card {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 10px 0;
+        }
+        
+        .metric-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #f9c10b;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #f9c10b, #ffd700);
+            color: #333;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            margin: 10px 5px;
+        }
+        
+        .btn:hover {
+            opacity: 0.9;
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+        
+        .alert-info {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .alert-warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+        }
+        
+        @media (max-width: 600px) {
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🚀 Development Support Update</h1>
+            <p>Your comprehensive guide to Java, Spring Boot, SQL, and monitoring tools</p>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            <!-- Java Development Section -->
+            <div class="section">
+                <h2>☕ Java Development</h2>
+                <p>Master Java programming with our comprehensive resources and best practices.</p>
+                
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <h4>Core Java</h4>
+                        <p>OOP principles, collections, streams, and modern Java features</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Advanced Java</h4>
+                        <p>Multithreading, reflection, annotations, and generics</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Java Tools</h4>
+                        <p>Maven, JUnit, IntelliJ IDEA, and debugging tools</p>
+                    </div>
+                </div>
+                
+                <div class="code-block">
+// Java 8 Streams Example
+List&lt;String&gt; names = Arrays.asList("John", "Jane", "Bob");
+names.stream()
+    .filter(name -> name.startsWith("J"))
+    .map(String::toUpperCase)
+    .forEach(System.out::println);
+                </div>
+            </div>
+            
+            <!-- Spring Boot Section -->
+            <div class="section">
+                <h2>🌱 Spring Boot Development</h2>
+                <p>Build robust applications with Spring Boot framework and microservices architecture.</p>
+                
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <h4>REST APIs</h4>
+                        <p>Create scalable RESTful services with Spring Boot</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Spring Data JPA</h4>
+                        <p>Database integration with JPA and Hibernate</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Security</h4>
+                        <p>JWT authentication and Spring Security</p>
+                    </div>
+                </div>
+                
+                <div class="code-block">
+@RestController
+@RequestMapping("/api")
+public class UserController {
+    @GetMapping("/users")
+    public ResponseEntity&lt;List&lt;User&gt;&gt; getAllUsers() {
+        return ResponseEntity.ok(userService.findAll());
+    }
+}
+                </div>
+            </div>
+            
+            <!-- Database Section -->
+            <div class="section">
+                <h2>🗄️ Database & SQL</h2>
+                <p>Master database design, SQL optimization, and data management.</p>
+                
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <h4>SQL Fundamentals</h4>
+                        <p>Essential SQL commands and database operations</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Advanced Queries</h4>
+                        <p>Complex joins, subqueries, and performance optimization</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Database Design</h4>
+                        <p>ERD modeling, normalization, and best practices</p>
+                    </div>
+                </div>
+                
+                <div class="code-block">
+-- Complex JOIN with aggregation
+SELECT 
+    u.username,
+    COUNT(o.id) as order_count,
+    SUM(o.total_amount) as total_spent
+FROM users u
+LEFT JOIN orders o ON u.id = o.user_id
+WHERE u.created_at >= '2024-01-01'
+GROUP BY u.id, u.username
+HAVING total_spent > 1000;
+                </div>
+            </div>
+            
+            <!-- Monitoring Section -->
+            <div class="section">
+                <h2>📊 Monitoring & Tools</h2>
+                <p>Comprehensive monitoring solutions and development tools for modern applications.</p>
+                
+                <!-- Metrics Dashboard -->
+                <div class="metric-card">
+                    <h3>📈 Application Metrics</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; margin-top: 20px;">
+                        <div>
+                            <div class="metric-value">99.9%</div>
+                            <div>Uptime</div>
+                        </div>
+                        <div>
+                            <div class="metric-value">150ms</div>
+                            <div>Response Time</div>
+                        </div>
+                        <div>
+                            <div class="metric-value">1.2K</div>
+                            <div>Requests/min</div>
+                        </div>
+                        <div>
+                            <div class="metric-value">85%</div>
+                            <div>CPU Usage</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <h4>Grafana</h4>
+                        <p>Real-time monitoring and visualization platform</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Prometheus</h4>
+                        <p>Metrics collection and alerting system</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>ELK Stack</h4>
+                        <p>Log management and analysis</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Docker</h4>
+                        <p>Containerization and deployment</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Reference -->
+            <div class="section">
+                <h2>📚 Quick Reference</h2>
+                <p>Essential commands and configurations for daily development.</p>
+                
+                <div class="alert alert-info">
+                    <strong>💡 Tip:</strong> Bookmark these commands for quick access during development.
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                    <div class="tech-item">
+                        <h4>Maven Commands</h4>
+                        <div class="code-block">
+mvn clean install
+mvn spring-boot:run
+mvn test
+mvn dependency:tree
+                        </div>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Git Commands</h4>
+                        <div class="code-block">
+git add .
+git commit -m "message"
+git push origin main
+git pull origin main
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Call to Action -->
+            <div class="section">
+                <h2>🎯 Get Started</h2>
+                <p>Ready to enhance your development skills? Access our comprehensive resources and start building amazing applications.</p>
+                
+                <div style="text-align: center; margin: 30px 0;">
+                    <a href="dev-support.html" class="btn">📖 View Full Documentation</a>
+                    <a href="login.html" class="btn">🔐 Access Dashboard</a>
+                </div>
+                
+                <div class="alert alert-success">
+                    <strong>✅ Success:</strong> Your development environment is ready for the next level!
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>Akash Creations</strong> - Empowering developers with comprehensive tools and resources</p>
+            <p style="font-size: 14px; color: #666; margin-top: 10px;">
+                📧 support@akashcreations.com | 📞 +91-9125231250 | 🌐 www.akashcreations.com
+            </p>
+            <div style="margin-top: 15px;">
+                <a href="#" style="color: #667eea; margin: 0 10px;">Facebook</a>
+                <a href="#" style="color: #667eea; margin: 0 10px;">Twitter</a>
+                <a href="#" style="color: #667eea; margin: 0 10px;">YouTube</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

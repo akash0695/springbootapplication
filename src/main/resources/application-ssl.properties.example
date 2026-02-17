@@ -1,0 +1,37 @@
+# SSL/TLS Configuration Example
+# Copy this file to application-ssl.properties and update with your values
+# Or add these properties to your main application.properties
+
+# Enable SSL
+server.ssl.enabled=true
+
+# Keystore configuration (for self-signed or Let's Encrypt)
+server.ssl.key-store=classpath:keystore.p12
+# Use environment variable for password in production:
+# server.ssl.key-store-password=${SSL_KEYSTORE_PASSWORD}
+# Or hardcode for development (NOT recommended for production):
+server.ssl.key-store-password=changeit
+
+# Keystore type
+server.ssl.key-store-type=PKCS12
+
+# Key alias
+server.ssl.key-alias=springboot
+
+# Key password (usually same as keystore password)
+server.ssl.key-password=${SSL_KEY_PASSWORD:changeit}
+
+# HTTPS port
+server.port=8443
+
+# HTTP port (for redirect to HTTPS - optional)
+# Uncomment if you want to redirect HTTP to HTTPS
+# server.http.port=8181
+
+# Security headers
+server.servlet.session.cookie.secure=true
+server.servlet.session.cookie.http-only=true
+
+# TLS protocol versions (optional - Spring Boot defaults are secure)
+# server.ssl.protocol=TLS
+# server.ssl.enabled-protocols=TLSv1.2,TLSv1.3

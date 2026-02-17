@@ -119,7 +119,7 @@
 <body>
     <div class="login-container">
         <div class="company-logo">
-            <h2>Akash <span class="text-danger">Creations</span></h2>
+            <h2 id="akash-header"><span class="text-danger">Akash</span> Creations</h2>
         </div>
         
         <div class="login-header">
@@ -212,17 +212,22 @@
                     },
                     error: function(xhr, status, error) {
                         var errorMessage = 'Login failed. Please check your credentials.';
+                        var showFeedback = false;
                         if (xhr.status === 401) {
                             try {
                                 var response = JSON.parse(xhr.responseText);
                                 if (response.error === 'ACCOUNT_NOT_APPROVED') {
                                     errorMessage = response.message;
+                                    showFeedback = true;
                                 } else {
                                     errorMessage = 'Invalid username or password.';
                                 }
                             } catch (e) {
                                 errorMessage = 'Invalid username or password.';
                             }
+                        }
+                        if (showFeedback) {
+                            errorMessage += '<br><a href="mailto:support@yourdomain.com?subject=Account%20Approval%20Request">Contact Administrator / Submit Feedback</a>';
                         }
                         showAlert(errorMessage, 'danger');
                     },
@@ -236,9 +241,13 @@
             function showAlert(message, type) {
                 $('#alert-container').html('<div class="alert alert-' + type + ' alert-dismissible fade show" role="alert">' +
                     message +
-                    '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' +
+                    '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
                     '</div>');
             }
+
+            $('#akash-header').css('cursor', 'pointer').on('click', function() {
+                window.location.href = 'index.html';
+            });
         });
         
         function togglePassword() {

@@ -65,11 +65,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					.antMatchers("/check-status.html").permitAll()  // Check approval status page
 					.antMatchers("/test-form.html", "/view-submissions.html").permitAll()  // Test pages
 					.antMatchers("/test-contact-form.html").permitAll()  // Test contact form
+					.antMatchers("/dev-support.html").permitAll()  // Development support page
+					.antMatchers("/project-detail.html").permitAll()  // Project detail page
 					.antMatchers("/css/**", "/js/**", "/images/**", "/fonts/**").permitAll()  // Static resources
 					.antMatchers("/dashboard.html").permitAll()  // Dashboard page (handles auth in frontend)
+					.antMatchers("/query-dashboard.html").permitAll()  // Query management page (handles auth in frontend)
+					.antMatchers("/assigned-queries.html").permitAll()  // Assigned queries page (handles auth in frontend)
 					.antMatchers("/admin-dashboard.html").permitAll()  // Admin dashboard page (handles auth in frontend)
 					.antMatchers("/create-admin.html").permitAll()  // Admin creation page
 					.antMatchers("/form-submissions").authenticated()  // API requires authentication
+					.antMatchers("/api/queries/submit").permitAll()  // Allow query submission from landing page
+					.antMatchers("/api/queries/**").authenticated()  // Query management requires authentication
 					.antMatchers("/admin/**").authenticated()  // Admin endpoints require authentication
 					.anyRequest().authenticated()  // All other requests need authentication
 				.and()
