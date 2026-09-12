@@ -4,36 +4,143 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <meta name="description" content="">
-        <meta name="author" content="Tooplate">
+        <meta name="description" content="Enterprise Software Projects - Akash Creations">
+        <meta name="author" content="Akash Creations">
 
-        <title>Waso Project Page - Free HTML Template</title>
+        <title>Projects - Akash Creations</title>
 
         <!-- CSS FILES -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
-        
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        
         <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-
         <link href="css/bootstrap.min.css" rel="stylesheet">
-
         <link href="css/bootstrap-icons.css" rel="stylesheet">
-
-        <link href="css/magnific-popup.css" rel="stylesheet">
-
         <link href="css/tooplate-waso-strategy.css" rel="stylesheet">
         
-<!--
-
-Tooplate 2130 Waso Strategy
-
-https://www.tooplate.com/view/2130-waso-strategy
-
-Free Bootstrap 5 HTML Template
-
--->
-
+        <style>
+            .project-card {
+                background: #fff;
+                border-radius: 16px;
+                overflow: hidden;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+                margin-bottom: 40px;
+                transition: transform 0.3s ease;
+            }
+            
+            .project-card:hover {
+                transform: translateY(-5px);
+            }
+            
+            .project-image {
+                width: 100%;
+                height: 300px;
+                object-fit: cover;
+            }
+            
+            .project-content {
+                padding: 30px;
+            }
+            
+            .project-title {
+                color: #333;
+                font-size: 1.6rem;
+                font-weight: 700;
+                margin-bottom: 15px;
+            }
+            
+            .project-subtitle {
+                color: #667eea;
+                font-weight: 600;
+                font-size: 0.9rem;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin-bottom: 10px;
+            }
+            
+            .project-description {
+                color: #555;
+                line-height: 1.8;
+                margin-bottom: 20px;
+            }
+            
+            .tech-stack {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                margin-bottom: 20px;
+            }
+            
+            .tech-badge {
+                background: linear-gradient(45deg, #667eea, #764ba2);
+                color: #fff;
+                padding: 6px 14px;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                font-weight: 600;
+            }
+            
+            .feature-list {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+            
+            .feature-list li {
+                padding: 8px 0;
+                color: #444;
+                display: flex;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .feature-list li i {
+                color: #28a745;
+                font-size: 1.1rem;
+                margin-top: 2px;
+            }
+            
+            .section-header {
+                text-align: center;
+                padding: 60px 0 40px;
+            }
+            
+            .section-header h2 {
+                font-size: 2.2rem;
+                font-weight: 700;
+                color: #333;
+                margin-bottom: 15px;
+            }
+            
+            .section-header p {
+                color: #666;
+                font-size: 1.1rem;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            
+            .hero-projects {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                padding: 80px 0 60px;
+                text-align: center;
+            }
+            
+            .hero-projects h1 {
+                color: #fff;
+                font-size: 2.8rem;
+                font-weight: 700;
+                margin-bottom: 15px;
+            }
+            
+            .hero-projects p {
+                color: rgba(255,255,255,0.9);
+                font-size: 1.2rem;
+            }
+            
+            .projects-section {
+                background: #f8f9fa;
+                padding: 40px 0 80px;
+            }
+        </style>
     </head>
     
     <body class="projects-detail-page" id="section_1">
@@ -41,7 +148,6 @@ Free Bootstrap 5 HTML Template
         <header class="site-header">
             <div class="container">
                 <div class="row align-items-center">
-
                     <div class="col-lg-3 col-md-5 col-7">
                         <p class="text-white mb-0">
                             <i class="bi-clock site-header-icon me-2"></i>
@@ -61,21 +167,17 @@ Free Bootstrap 5 HTML Template
                     <div class="col-lg-3 col-md-3 col-12 ms-auto">
                         <ul class="social-icon">
                             <li><a href="https://www.facebook.com/" class="social-icon-link bi-facebook"></a></li>
-
                             <li><a href="https://twitter.com/shyamgupta101" class="social-icon-link bi-twitter"></a></li>
-
                             <li><a href="https://www.youtube.com/channel/UCALzW634oVjYv0rQ9MQx5_w" class="social-icon-link bi-youtube"></a></li>
                         </ul>
                     </div>
-
                 </div>
             </div>
         </header>
 
         <nav class="navbar navbar-expand-lg bg-white shadow-lg">
             <div class="container">
-
-                <a href="index.html" class="navbar-brand">Akash<span class="text-danger">Creation</span></a>
+                <a href="index.html" class="navbar-brand">Akash <span class="text-danger">Creations</span></a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -100,130 +202,204 @@ Free Bootstrap 5 HTML Template
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html#section_5"><small class="small-title"><strong class="text-warning">05</strong></small> Contact</a>
+                            <a class="nav-link" href="dev-support.html"><small class="small-title"><strong class="text-warning">05</strong></small> Dev Support</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html#section_5"><small class="small-title"><strong class="text-warning">06</strong></small> Contact</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.html"><small class="small-title"><strong class="text-warning">07</strong></small> Login</a>
                         </li>
                     </ul>
                 </div>
-                        
             </div>
         </nav>
 
         <main>
-
-            <section class="hero section-hero section-padding">
+            <!-- Hero Section -->
+            <section class="hero-projects">
                 <div class="container">
-                    <div class="row">
+                    <h1><i class="bi bi-folder-check"></i> Our Projects</h1>
+                    <p>Enterprise-grade solutions built with cutting-edge technology</p>
+                </div>
+            </section>
 
-                        <div class="col-lg-6 col-12 text-center mx-auto">
-                            <div class="section-hero-text">
-                                <small class="small-title text-warning">Projects Detail</small>
-
-                                <h1 class="text-white">Conference</h1>
+            <!-- Projects Section -->
+            <section class="projects-section">
+                <div class="container">
+                    
+                    <!-- Project 1: Microservices Orchestration -->
+                    <div class="project-card">
+                        <div class="row g-0">
+                            <div class="col-lg-6">
+                                <img src="images/projects/orchestration-microservices.png" class="project-image" alt="Microservices Orchestration Platform" loading="lazy">
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="project-content">
+                                    <p class="project-subtitle"><i class="bi bi-diagram-3"></i> Enterprise Architecture</p>
+                                    <h2 class="project-title">Microservices Orchestration Platform</h2>
+                                    <p class="project-description">
+                                        A highly scalable, distributed orchestration engine built on Java 17 and Spring Boot 3.x, implementing choreography and orchestration patterns for enterprise workflow automation. The platform leverages event-driven architecture with Apache Kafka for asynchronous inter-service communication.
+                                    </p>
+                                    
+                                    <div class="tech-stack">
+                                        <span class="tech-badge">Java 17</span>
+                                        <span class="tech-badge">Spring Boot 3.x</span>
+                                        <span class="tech-badge">Spring Cloud</span>
+                                        <span class="tech-badge">Apache Kafka</span>
+                                        <span class="tech-badge">Kubernetes</span>
+                                        <span class="tech-badge">Docker</span>
+                                        <span class="tech-badge">PostgreSQL</span>
+                                        <span class="tech-badge">Redis</span>
+                                    </div>
+                                    
+                                    <ul class="feature-list">
+                                        <li><i class="bi bi-check-circle-fill"></i> API Gateway with Spring Cloud Gateway for centralized routing and load balancing</li>
+                                        <li><i class="bi bi-check-circle-fill"></i> Service Discovery using Netflix Eureka with health monitoring</li>
+                                        <li><i class="bi bi-check-circle-fill"></i> Circuit Breaker pattern implementation with Resilience4j</li>
+                                        <li><i class="bi bi-check-circle-fill"></i> Distributed tracing with Zipkin and Sleuth for observability</li>
+                                        <li><i class="bi bi-check-circle-fill"></i> Containerized deployment on Kubernetes with Helm charts</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-
                     </div>
+
+                    <!-- Project 2: Healthcare Research Tracker -->
+                    <div class="project-card">
+                        <div class="row g-0">
+                            <div class="col-lg-6 order-lg-2">
+                                <img src="images/projects/healthcare-research-tracker.png" class="project-image" alt="Healthcare Research Paper Tracking" loading="lazy">
+                            </div>
+                            <div class="col-lg-6 order-lg-1">
+                                <div class="project-content">
+                                    <p class="project-subtitle"><i class="bi bi-heart-pulse"></i> Healthcare Technology</p>
+                                    <h2 class="project-title">Research Paper Tracking System</h2>
+                                    <p class="project-description">
+                                        A comprehensive healthcare research paper lifecycle management application featuring a modern responsive UI, seamless Google Sheets API integration for collaborative data management, and AWS AppConfig feature toggles for controlled feature rollouts and A/B testing capabilities.
+                                    </p>
+                                    
+                                    <div class="tech-stack">
+                                        <span class="tech-badge">React.js</span>
+                                        <span class="tech-badge">Node.js</span>
+                                        <span class="tech-badge">Google Sheets API</span>
+                                        <span class="tech-badge">AWS AppConfig</span>
+                                        <span class="tech-badge">AWS Lambda</span>
+                                        <span class="tech-badge">DynamoDB</span>
+                                        <span class="tech-badge">CloudWatch</span>
+                                    </div>
+                                    
+                                    <ul class="feature-list">
+                                        <li><i class="bi bi-check-circle-fill"></i> Workflow engine for paper submission, review, and publication tracking</li>
+                                        <li><i class="bi bi-check-circle-fill"></i> Real-time bidirectional sync with Google Sheets for research data</li>
+                                        <li><i class="bi bi-check-circle-fill"></i> AWS AppConfig Feature Flags for dynamic feature toggling</li>
+                                        <li><i class="bi bi-check-circle-fill"></i> Analytics dashboard with submission trends and status distribution</li>
+                                        <li><i class="bi bi-check-circle-fill"></i> Role-based access control for researchers, reviewers, and admins</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: Tree/Property Contact Management -->
+                    <div class="project-card">
+                        <div class="row g-0">
+                            <div class="col-lg-6">
+                                <img src="images/projects/tree-contact-management.png" class="project-image" alt="Tree and Property Contact Management" loading="lazy">
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="project-content">
+                                    <p class="project-subtitle"><i class="bi bi-tree"></i> Property Management</p>
+                                    <h2 class="project-title">Arboricultural Contact Management System</h2>
+                                    <p class="project-description">
+                                        An enterprise property management solution for high-tree country municipalities, enabling comprehensive tracking of unwanted/hazardous trees across multiple sites. The platform manages annual tree inventories, vendor contracts, task assignments, and compliance documentation with full geospatial integration.
+                                    </p>
+                                    
+                                    <div class="tech-stack">
+                                        <span class="tech-badge">Spring Boot</span>
+                                        <span class="tech-badge">Angular</span>
+                                        <span class="tech-badge">PostGIS</span>
+                                        <span class="tech-badge">Mapbox API</span>
+                                        <span class="tech-badge">AWS S3</span>
+                                        <span class="tech-badge">REST API</span>
+                                        <span class="tech-badge">JWT Auth</span>
+                                    </div>
+                                    
+                                    <ul class="feature-list">
+                                        <li><i class="bi bi-check-circle-fill"></i> Tree inventory with species, dimensions, condition assessment, and site area data</li>
+                                        <li><i class="bi bi-check-circle-fill"></i> Annual increment tracking with YoY growth comparison analytics</li>
+                                        <li><i class="bi bi-check-circle-fill"></i> Vendor allocation module with contract management and SLA tracking</li>
+                                        <li><i class="bi bi-check-circle-fill"></i> Task lifecycle management with start/end geo-tagged photo evidence</li>
+                                        <li><i class="bi bi-check-circle-fill"></i> GPS coordinates capture for precise tree location mapping</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: Fleet Equipment Management -->
+                    <div class="project-card">
+                        <div class="row g-0">
+                            <div class="col-lg-6 order-lg-2">
+                                <img src="images/projects/fleet-equipment-management.png" class="project-image" alt="Fleet Equipment Management System" loading="lazy">
+                            </div>
+                            <div class="col-lg-6 order-lg-1">
+                                <div class="project-content">
+                                    <p class="project-subtitle"><i class="bi bi-ship"></i> Maritime Operations</p>
+                                    <h2 class="project-title">Fleet Equipment Maintenance Platform</h2>
+                                    <p class="project-description">
+                                        A mission-critical fleet management system designed for maritime operations, providing synchronized equipment maintenance tracking between ship-side and shore-office environments. The platform ensures regulatory compliance with proactive service reminders, technician assignments, and comprehensive maintenance history logging.
+                                    </p>
+                                    
+                                    <div class="tech-stack">
+                                        <span class="tech-badge">Java</span>
+                                        <span class="tech-badge">Spring Boot</span>
+                                        <span class="tech-badge">PostgreSQL</span>
+                                        <span class="tech-badge">RabbitMQ</span>
+                                        <span class="tech-badge">Offline-First PWA</span>
+                                        <span class="tech-badge">WebSocket</span>
+                                        <span class="tech-badge">Docker</span>
+                                    </div>
+                                    
+                                    <ul class="feature-list">
+                                        <li><i class="bi bi-check-circle-fill"></i> Equipment inventory with service history, status, and responsible technician</li>
+                                        <li><i class="bi bi-check-circle-fill"></i> Bidirectional sync engine for ship-to-office data synchronization</li>
+                                        <li><i class="bi bi-check-circle-fill"></i> Automated service reminder notifications with escalation workflows</li>
+                                        <li><i class="bi bi-check-circle-fill"></i> Maintenance calendar with scheduled and unscheduled service tracking</li>
+                                        <li><i class="bi bi-check-circle-fill"></i> Offline-capable PWA for ship-side operations with limited connectivity</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </section>
-
-
-            <section class="projects section-padding">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-lg-10 col-12 mb-5">
-                            <h2 class="mb-3">Brands we've crafted so far</h2>
-
-                            <p>Akash Creation is a Bootstrap 5 HTML template for your business. You may use this template for any purpose. You may not redistribute the template ZIP file on any other website.</p>
-
-
-                        </div>
-
-                        <div class="col-lg-6 col-12 mb-5">
-                            <img src="images/projects/pj-gal-szabo-CIXXIWxxec4-unsplash.jpg" class="img-fluid projects-image" alt="">
-
-                            <h2 class="mt-3 mb-1">Ways to start a project</h2>
-
-                            <p>Mauris in convallis nunc, non facilisis arcu. Nunc sapien interdum at diam, aliquam Lorem ipsum Sed eiusmod esse aliqua sed incididunt aliqua incididunt mollit id et sit proident dolor nulla.</p>
-
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut dolore</p>
-                        </div>
-
-                        <div class="col-lg-6 col-12 mb-5">
-                            <img src="images/projects/team-fredi-FN3vmVee2sI-unsplash.jpg" class="img-fluid projects-image" alt="">
-
-                            <h2 class="mt-3 mb-1">Strategies for next move</h2>
-
-                            <p>Mauris in convallis nunc, non facilisis arcu. Nunc sapien interdum at diam, aliquam Lorem ipsum Sed eiusmod esse aliqua sed incididunt aliqua incididunt mollit id et sit proident dolor nulla.</p>
-
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut dolore</p>
-                        </div>
-
-                        <div class="col-lg-4 col-12">
-                            <img src="images/projects/vmsign-x9yGe7wnvKQ-unsplash.jpg" class="img-fluid projects-image" alt="">
-
-                            <h3 class="mt-3 mb-1">Banana Team</h3>
-
-                            <p>Mauris in convallis nunc, non facilisis arcu. Nunc sapien interdum at diam, aliquam Lorem ipsum Sed eiusmod.</p>
-                        </div>
-
-                        <div class="col-lg-4 col-12 my-lg-0 my-5">
-                            <img src="images/projects/elena-baidak-pz69kY0UQuQ-unsplash.jpg" class="img-fluid projects-image" alt="">
-
-                            <h3 class="mt-3 mb-1">Meeting Time</h3>
-
-                            <p>Sed eiusmod esse aliqua sed incididunt aliqua incididunt mollit id et sit proident dolor. That is the new way to start a business.</p>
-                        </div>
-
-                        <div class="col-lg-4 col-12">
-                            <img src="images/projects/tangerine-newt-AKH4OVEmILc-unsplash.jpg" class="img-fluid projects-image" alt="">
-
-                            <h3 class="mt-3 mb-1">Avocado Work</h3>
-
-                            <p>You may want to visit Too CSS blog for latest collections of Bootstrap Templates. Please tell your friends about our website. Thank you.</p>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
         </main>
 
         <footer class="site-footer">
             <div class="container">
                 <div class="row">
-                        
                     <div class="col-lg-6 col-12">
                         <div class="site-footer-wrap d-flex align-items-center">
-                            <p class="copyright-text mb-0 me-4">Copyright © 2022 Akash Creation Co., Ltd.</p>
-
+                            <p class="copyright-text mb-0 me-4">Copyright © 2024 Akash Creations</p>
                             <ul class="social-icon">
                                 <li><a href="https://www.facebook.com/" class="social-icon-link bi-facebook"></a></li>
-
                                 <li><a href="https://twitter.com/shyamgupta101" class="social-icon-link bi-twitter"></a></li>
-
                                 <li><a href="https://www.youtube.com/channel/UCALzW634oVjYv0rQ9MQx5_w" class="social-icon-link bi-youtube"></a></li>
                             </ul>
-                            
                         </div>
                     </div>
-                    
                     <div class="col-lg-6 col-12">
-                    	<p class="copyright-text mb-0 me-4">Akash Creations HTML Template is designed by <a href="https://www.google.com/" target="_blank">Akash</a></p>
+                        <p class="copyright-text mb-0 me-4">Enterprise Software Solutions by Akash Creations</p>
                     </div>
-                    
                 </div>
             </div>
         </footer>
 
         <!-- JAVASCRIPT FILES -->
-        <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.sticky.js"></script>
-        <script src="js/jquery.magnific-popup.min.js"></script>
-        <script src="js/magnific-popup-options.js"></script>
-        <script src="js/click-scroll.js"></script>
-        <script src="js/custom.js"></script>
-
     </body>
 </html>
